@@ -51,30 +51,40 @@
         $("#editLocationModal").modal("show");
     }
 
-    $scope.addLocation = function () {
-        var confirmation = confirm("Are you sure to add this new location?");
-        if (confirmation) {
-            var data = {
-                LocationName: $scope.newLocation,
-                LocationAddress: $scope.newAddress
+    $scope.addLocation = function (LocationName, LocationAddress) {
+        var isValid;
+        isValid = Location != undefined && LocationAddress != undefined;
+       
+
+        if (isValid) {
+            var confirmation = confirm("Are you sure to add this new location?");
+            if (confirmation) {
+                var data = {
+                    LocationName: $scope.newLocation,
+                    LocationAddress: $scope.newAddress
+                }
+                $http.post('/Location/AddNewLocation', data).then(
+                    function successCallback(response) {
+                        if (response.data == "LocationExists") {
+                            toastr.error("Location already exists. Please try another.", "Can't add new location");
+                            $scope.newLocation = '';
+                            $scope.newAddress = '';
+                        }
+                        else {
+                            toastr.success("You've successfully created a new location.", "New Location Added");
+                            $scope.initialize();
+                            $scope.newLocation = '';
+                            $scope.newAddress = '';
+                            $("#addLocationModal").modal("hide");
+                        }
+                    },
+                    function errorCallback(response) {
+
+                    });
             }
-            $http.post('/Location/AddNewLocation', data).then(
-             function successCallback(response) {
-                 if (response.data == "LocationExists") {
-                     toastr.error("Location already exists. Please try another.", "Can't add new location");
-                     $scope.newLocation = '';
-                 } else {
-                     toastr.success("You've successfully created a new location.", "New Location Added");
-                     $scope.initialize();
-                     $scope.newLocation = '';
-                     $("#addLocationModal").modal("hide");
-                 }
-             },
-             function errorCallback(response) {
-
-             });
-        } else {
-
+        }
+        else {
+            toastr.warning("Please fill out all data.", "Could not be add item.");
         }
     }
 
