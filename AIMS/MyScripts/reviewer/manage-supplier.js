@@ -243,8 +243,7 @@
     }
     //add new item in inventory to database
     $scope.addInventoryItem = function (newItemName, unitOfMeasurementID, newItemCode, newItemLimit) {
-        var isValid;
-            isValid = newItemName != undefined && unitOfMeasurementID != undefined && newItemCode != undefined && newItemLimit != undefined;
+        var isValid = newItemName != undefined && unitOfMeasurementID != undefined && newItemCode != undefined && newItemLimit != undefined;
 
         if (isValid) {
                 var addItemConfirm = confirm('Are you sure to add this new item?');
