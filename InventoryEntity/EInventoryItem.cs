@@ -19,10 +19,11 @@ namespace InventoryEntity
         public int? Location { get; set; }
 
         [StringLength(150)]
-        public string ItemCode { get; set; }
+        public string ItemDescription { get; set; }
 
-        [StringLength(150)]
-        public string ItemLimit { get; set; }
+        public string ItemBegBal { get; set; }
+
+
     }
 }
 
