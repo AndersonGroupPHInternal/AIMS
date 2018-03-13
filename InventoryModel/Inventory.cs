@@ -12,6 +12,7 @@ namespace AIMS.Models
         public string ItemName { get; set; }
         public string Location { get; set; }
         public int Quantity { get; set; }
+
     }
     public class Stocks
     {
@@ -29,7 +30,7 @@ namespace AIMS.Models
             LastRequestedDate.Value.ToString("MMMM dd, yyyy");
 
         public string LastRequestedName { get; set; }
-        [Range(0, Int32.MaxValue, ErrorMessage = "Value should be greater than or equal to 1")]
+      
         public int RemainingQuantity
         {
             get
@@ -38,5 +39,6 @@ namespace AIMS.Models
             }
         }
         public string ItemCode { get; set; }
+        public string ItemBegBal { get; set; }
     }
 }
