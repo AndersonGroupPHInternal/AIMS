@@ -242,14 +242,15 @@
         $("#addItemModal").modal("hide");
     }
     //add new item in inventory to database
-    $scope.addInventoryItem = function (newItemName, unitOfMeasurementID, newItemCode, newItemLimit) {
-        var isValid = newItemName != undefined && unitOfMeasurementID != undefined && newItemCode != undefined && newItemLimit != undefined;
+    $scope.addInventoryItem = function (newBegBal,newItemName, unitOfMeasurementID, newItemCode, newItemLimit) {
+        var isValid = newBegBal!= undefined && newItemName != undefined && unitOfMeasurementID != undefined && newItemCode != undefined && newItemLimit != undefined;
 
         if (isValid) {
                 var addItemConfirm = confirm('Are you sure to add this new item?');
 
             if (addItemConfirm) {
                 var data = {
+                    newBegBal: newBegBal,
                     newItemName: newItemName,
                     newItemCode: newItemCode,
                     unitOfMeasurementID: (unitOfMeasurementID === null ? 0 : unitOfMeasurementID),
@@ -264,12 +265,14 @@
                     .then(
                     function successCallback(response) {
                         if (response.data === "ItemExist") {
+                            $scope.newBegBal = '';
                             $scope.newItemName = '';
                             $scope.newItemCode = '';
                             $scope.newItemLimit = '';
                             toastr.warning("There must be no the same item it must be unique.", "Item is already Exists");
                             //$scope.ctrl.forNewItem = [];
                         } else {
+                            $scope.newBegBal = '';
                             $scope.newItemName = '';
                             $scope.newItemCode = '';
                             $scope.newItemLimit = '';

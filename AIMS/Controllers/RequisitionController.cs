@@ -964,7 +964,7 @@ namespace AIMS.Controllers
                             ItemName = newItemName,
                             UnitOfMeasurementId = unitOfMeasurementID,
                             ItemCode = newItemCode,
-                            ItemBegBal = newBegBal
+                            ItemBegBal = newBegBal,
                         };
                         context.InventoryItem.Add(eInventoryItem);
                         context.SaveChanges();
