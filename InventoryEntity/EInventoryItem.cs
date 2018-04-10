@@ -10,7 +10,7 @@ namespace InventoryEntity
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int InventoryItemId { get; set; }
-        
+
         [StringLength(150)]
         public string ItemName { get; set; }
 
@@ -23,6 +23,6 @@ namespace InventoryEntity
 
         public string ItemBegBal { get; set; }
         public string ItemCode { get; set; }
+        public object RequestItemId { get; set; }
     }
 }
-

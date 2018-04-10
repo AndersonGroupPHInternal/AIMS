@@ -40,5 +40,6 @@ namespace AIMS.Models
         }
         public string ItemCode { get; set; }
         public string ItemBegBal { get; set; }
+        public string LatestQuantity { get; set; }
     }
 }
