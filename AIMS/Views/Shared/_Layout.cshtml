@@ -1,7 +1,6 @@
 ﻿@using AccountsWebAuthentication.Helper;
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8" />
 
@@ -30,7 +29,21 @@
 
 </head>
 
+<style>
+    .navbar {
+        border-bottom-color: #c05f5f !important;
+        border-width: 0 1px 4px 1px;
+    }
 
+    li a:hover, .navbar-brand:hover {
+        color: #2b358a !important;
+        font-weight: bold;
+    }
+
+    .navDiv {
+        height: 90px;
+    }
+</style>
 
 <body ng-app="myApp">
     <div class="navbar navbar-default navbar-fixed-top navDiv">
@@ -47,12 +60,12 @@
             <div class="navbar-collapse collapse navbar-fixed-top" ng-controller="myCtrl2" ng-init="filterActions()">
                 <ul class="nav navbar-nav">
                     <li><a class="navbar-brand" href="/Home/LandingPage"><img src="~/Content/Images/inventory.png" width="340" height="45" /></a></li>
-                    
+                    <li ng-if="userRoles.indexOf('Receptionist') !== -1 || userRoles.indexOf('Employee') !== -1 || userRoles.indexOf('PurchasingOfficer') !== -1">
                         @*@if (WindowsUser.HasUserRoles(new string[] { "Receptionist" }))
                             {*@
                     <li><a href="/Home/LandingPage"><i class="fa fa-home"></i> Home </a></li>
-                  @*}
-                    @*if (WindowsUser.HasUserRoles(new string[] { "Employee" }))
+                    @*}*@
+                    @*@if (WindowsUser.HasUserRoles(new string[] { "Employee" }))
                          {
                             <li><a href="/Home/LandingPage"><i class="fa fa-home"></i> Home </a></li>
                          }
@@ -71,7 +84,7 @@
                             </ul>
                         </li>
                         }*@
-                   @*@if (WindowsUser.HasUserRoles(new string[] { "Employee" }))
+                    @*@if (WindowsUser.HasUserRoles(new string[] { "Employee" }))
                         {
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-archive"></i> Inventory <span class="fa fa-chevron-down"></span></a>
@@ -92,13 +105,14 @@
                         </li>
                     }
 
-                    <li @*class="dropdown" ng-if="userRoles.indexOf('DepartmentHead') !== -1 || userRoles.indexOf('Employee') !== -1"*@>
+                    <li class="dropdown" ng-if="userRoles.indexOf('DepartmentHead') !== -1 || userRoles.indexOf('Employee') !== -1">
                         @if (WindowsUser.HasUserRoles(new string[] { "Employee" }))
                         {
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-edit"></i>Supply Request <span class="fa fa-chevron-down"></span></a>                             } <ul class="dropdown-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-edit"></i>Supply Request <span class="fa fa-chevron-down"></span></a>
+                        } <ul class="dropdown-menu">
 
                             <li ng-if="userRoles.indexOf('Employee') !== -1"><a href="/Request/AddRequest">Add Request</a></li>
-                           <li ng-if="userRoles.indexOf('Employee') !== -1"><a href="/Request/CurrentRequestStatus">Current Request Status</a></li>
+                            <li ng-if="userRoles.indexOf('Employee') !== -1"><a href="/Request/CurrentRequestStatus">Current Request Status</a></li>
 
                             @if (WindowsUser.HasUserRoles(new string[] { "DepartmentHead" }))
                             {
@@ -108,8 +122,7 @@
                     </li>
 
                     @if (WindowsUser.HasUserRoles(new string[] { "Receptionist" }))
-                    {           
-
+                    {
                         <li class="dropdown" ng-if="userRoles.indexOf('Receptionist') !== -1">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-shopping-bag"></i> Requisition <span class="fa fa-chevron-down"></span></a>
                             <ul class="dropdown-menu">
@@ -120,7 +133,7 @@
                                 <li><a href="/Reviewer/PO">Completed</a></li>
                                 <li><a href="/Request/ViewRequest">Supply Request</a></li>
                             </ul>
-                       </li>
+                        </li>
                     }
 
                     @if (WindowsUser.HasUserRoles(new string[] { "PurchasingOfficer" }))
@@ -138,7 +151,6 @@
                             </ul>
                         </li>
                     }
-
                     @if (WindowsUser.HasUserRoles(new string[] { "PurchasingOfficer" }))
                     {
                         <li><a href="/Reviewer/ManageSupplier"><i class="fa fa-group"></i> Suppliers</a></li>
@@ -434,19 +446,6 @@
 
         html, body {
             font-size: 13.5px;
-        }
-        .navbar {
-            border-bottom-color: #c05f5f !important;
-            border-width: 0 1px 4px 1px;
-        }
-
-        li a:hover, .navbar-brand:hover {
-            color: #2b358a !important;
-            font-weight: bold;
-        }
-
-        .navDiv {
-            height: 90px;
         }
     </style>
 
