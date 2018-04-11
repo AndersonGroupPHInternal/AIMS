@@ -32,7 +32,7 @@
             <div class="navbar-collapse collapse navbar-fixed-top" ng-controller="myCtrl2" ng-init="filterActions()">
                 <ul class="nav navbar-nav">
                     <li><a class="navbar-brand" href="/Home/LandingPage"><img src="~/Content/Images/inventory.png" width="340" height="45" /></a></li>
-                    <li ng-if="userRoles.indexOf('Receptionist') !== -1 || userRoles.indexOf('Employee') !== -1 || userRoles.indexOf('PurchasingOfficer') !== -1">
+                    @*<li ng-if="userRoles.indexOf('Receptionist') !== -1 || userRoles.indexOf('Employee') !== -1 || userRoles.indexOf('PurchasingOfficer') !== -1"> </li>*@
 
                         @*@if (WindowsUser.HasUserRoles(new string[] { "Receptionist" }))
                             {*@
@@ -47,7 +47,7 @@
                     <li><a href="/Home/LandingPage"><i class="fa fa-home"></i> Home </a></li>
                     @*}*@
 
-                    <li ng-if="userRoles.indexOf('Receptionist') !== -1 || userRoles.indexOf('Employee') !== -1 || userRoles.indexOf('PurchasingOfficer') !== -1">
+                    <li @*ng-if="userRoles.indexOf('Receptionist') !== -1 || userRoles.indexOf('Employee') !== -1 || userRoles.indexOf('PurchasingOfficer') !== -1"*@>
                         @*@if (WindowsUser.HasUserRoles(new string[] { "Receptionist" }))
                             {*@
                         @*<li class="dropdown">
@@ -114,7 +114,7 @@
 
                         @if (WindowsUser.HasUserRoles(new string[] { "PurchasingOfficer" }))
                         {
-                            <li ng-if="userRoles.indexOf('PurchasingOfficer') !== -1"><a href="/Location/ManageLocation"><i class="fa fa-map"></i> Location</a></li>
+                            <li @*ng-if="userRoles.indexOf('PurchasingOfficer') !== -1"*@><a href="/Location/ManageLocation"><i class="fa fa-map"></i> Location</a></li>
                         }
                         @if (WindowsUser.HasUserRoles(new string[] { "PurchasingOfficer" }))
                         {
@@ -129,7 +129,7 @@
                         }
                         @if (WindowsUser.HasUserRoles(new string[] { "PurchasingOfficer" }))
                         {
-                            <li ng-if="userRoles.indexOf('PurchasingOfficer') !== -1"><a href="/Reviewer/ManageSupplier"><i class="fa fa-group"></i> Suppliers</a></li>
+                            <li @*ng-if="userRoles.indexOf('PurchasingOfficer') !== -1"*@><a href="/Reviewer/ManageSupplier"><i class="fa fa-group"></i> Suppliers</a></li>
                         }
 
                         @*@if (WindowsUser.HasUserRoles(new string[] { "Receptionist" }))
