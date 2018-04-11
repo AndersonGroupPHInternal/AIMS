@@ -1,4 +1,4 @@
-﻿using AIMS.Helper;
+using AIMS.Helper;
 using AIMS.Models;
 using InventoryContext;
 using System;
@@ -116,8 +116,10 @@ namespace AIMS.Controllers
                           join requestedQty in computeRequestedQuantity on inv.InventoryItemId equals requestedQty.InventoryItemID into joined2
                           from requestedQtyj in joined2.DefaultIfEmpty()
 
+
                               //join rq in computeRequestedQuantity on inv.InventoryItemId equals rq.InventoryItemID into joined3
                               //from rqy in joined3.DefaultIfEmpty()
+
 
 
                           select new Stocks

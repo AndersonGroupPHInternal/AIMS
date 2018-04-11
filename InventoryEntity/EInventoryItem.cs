@@ -1,4 +1,4 @@
-﻿using BaseEntity;
+using BaseEntity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -21,8 +21,15 @@ namespace InventoryEntity
         [StringLength(150)]
         public string ItemDescription { get; set; }
 
+
         public string ItemBegBal { get; set; }
         public string ItemCode { get; set; }
         public object RequestItemId { get; set; }
+
+
+        public string ItemBegBal { get; set; }
+
+
+
     }
 }

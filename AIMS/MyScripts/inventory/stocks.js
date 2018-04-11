@@ -1,4 +1,4 @@
-﻿app.controller("myCtrl", function ($scope, $http) {
+app.controller("myCtrl", function ($scope, $http) {
     $scope.requisition;
     $scope.initialize = function () {
 
@@ -39,5 +39,12 @@
         var isValid;
 
 
+
     };
+
+    $scope.validation = function (inventoryItemId, itemName, totalStock, requestedQuantity, newItemLimit) {
+        var isValid;
+
+
+
 });
