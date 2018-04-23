@@ -1,5 +1,5 @@
-﻿
-<script type="text/javascript" src="~/MyScripts/inventory/stocks.js"></script>
+﻿<script type="text/javascript" src="~/MyScripts/inventory/stocks.js"></script>
+
 
 <div class="jumbotron" style="margin-top: 100px;">
     <div ng-controller="myCtrl" ng-init="initialize()">
@@ -11,85 +11,109 @@
             </div>
             <div class="title_right">
                 <div class="col-md-7 col-sm-7 col-xs-12 form-group pull-right tohahahp_search">
-                    <div class="input-group">
-                        <input ng-model="searchText" type="text" class="form-control" placeholder="Search here...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Go!</button>
-                        </span>
-                    </div>
                 </div>
             </div>
         </div>
-                     <!-- Quantity Monitoring -->
+        <!-- Quantity Monitoring -->
         <div>
             <p><b>LEGEND</b></p>
             <p><span class="badge bg-blue">&nbsp</span><small><small>&nbsp;&nbsp; Items whose quantity are more than 10 </small></small></p>
-            <p><span class="badge bg-red">&nbsp</span><small><small>&nbsp;&nbsp; Items whose quantity are less than 10 </small></small></p>   
+            <p><span class="badge bg-red">&nbsp</span><small><small>&nbsp;&nbsp; Items whose quantity are less than 10 </small></small></p>
         </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    <div class="x_content">
+                        <!-- content starts here -->
+                        <style type="text/css">
+                            .red {
+                                color: red;
+                            }
 
-                <div class="clearfix"></div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="x_panel">
-                            <div class="x_content">
-                                <!-- content starts here -->
-                                      <style type="text/css">
-                                    .red
-                                    {
-                                        color: red;
-                                    }
+                            .black {
+                                color: black !important;
+                            }
+                        </style>
+                        <div>
+                            <!--REVIEW-->
+                            <table class="table table-bordered table-hover" id="tableid">
+                                <thead class="t">
+                                    <tr>
+                                        <th ng-click="predicate='InventoryItemIDn'; reverse=!reverse">Inventory Item</th>
+                                        <th ng-click="predicate='ItemName'; reverse=!reverse">Item Name<br></th>
+                                        <th ng-click="predicate='ItemCode'; reverse=!reverse">Item Description<br></th>
+                                        <th ng-click="predicate='ItemBegBal'; reverse=!reverse">Beginning Balance</th>
+                                        <th colspan="2" ng-click="predicate='TotalStock'; reverse=!reverse">Received Purchased </th>
+                                        <th colspan="2" ng-click="predicate='RequestedQuantity'; reverse=!reverse">Pull-out Quantity  </th>
+                                        <th ng-click="predicate='RemainingQuantity'; reverse=!reverse">Ending Balance</th>
 
-                                    .black
-                                    {
-                                        color: black !important;
-                                    }
-                                </style>
-                                    <div>
-                                    <!--REVIEW-->
-                                      <table class="table table-bordered table-hover" id="tableid">
-                                        <thead class="t">
-                                            <tr>
-                                                <th ng-click="predicate='InventoryItemID'; reverse=!reverse">Item No.<br><br></th>
-                                                <th ng-click="predicate='ItemName'; reverse=!reverse">Item Name<br><br></th>
-                                                <th ng-click="predicate='ItemDescription'; reverse=!reverse">Item Description<br><br></th>
-                                                <th ng-click="predicate='UnitOfDescription'; reverse=!reverse">Unit Of Description<br><br></th>
-                                                @*<th ng-click="predicate='TotalStock'; reverse=!reverse">Total Purchased<br>Quantity</th>*@
-                                                <th ng-click="predicate='RemainingQuantity'; reverse=!reverse">Total Remaining<br>Quantity<br></th>
-                                                @*<th ng-click="predicate='RequisitionDate'; reverse=!reverse">Date of Last Transaction<br><br></th>*@
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr ng-repeat="item in itemStocks | orderBy:predicate:reverse | filter: searchText">
-                                                <td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
-                                                    <span ng-bind="item.InventoryItemID"></span>
-                                                </td>
-                                                <td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
-                                                    <span ng-bind="item.ItemName"></span>
-                                                </td>
-                                                <td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
-                                                    <span ng-bind="item.ItemDescription"></span>
-                                                </td>
-                                                <td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
-                                                    <span ng-bind="item.UnitOfDescription"></span>
-                                                </td>
-                                                @*<td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
-                                                    <span ng-bind="item.TotalStock"></span>
-                                                </td>*@
-                                                <td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
-                                                    <span ng-bind="item.RemainingQuantity"></span>
-                                                </td>
-                                            </tr>
-                                            <tr ng-show="(itemStocks | filter:searchText).length == 0">
-                                                <td colspan="7" id="locationAction" align="center">No results found...</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    </div>
-                                <!-- content ends here -->
-                            </div>
-                            @Html.Partial("~/Views/Shared/_Pagination.cshtml")
+                                    </tr>
+
+                                    <tr>
+                                        <td> </td>
+                                        <td> </td>
+                                        <td> </td>
+                                        <td> </td>
+                                        <td>Transaction Date</td>
+                                        <td>Quantity</td>
+                                        <td>Transaction Date</td>
+                                        <td>Quantity</td>
+                                        <td> </td>
+                                    </tr>
+
+                                </thead> 
+                                <tbody>
+
+                                    <tr ng-repeat="item in itemStocks | orderBy:predicate:reverse | filter: searchText">
+                                        <td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
+                                            {{$index + 1}}.
+                                        </td>
+                                        <td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
+                                            <span ng-bind="item.ItemName"></span>
+                                        </td>
+                                        <td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
+                                            <span ng-bind="item.ItemCode"></span>
+                                        </td>
+                                        <td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
+                                            <span ng-bind="item.ItemBegBal"></span>
+                                        </td>
+                                        <td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
+                                            <span ng-bind="item.LastRequestedDateString"></span>
+                                        </td>
+                                        <td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
+                                            <span ng-bind="item.LatestQuantity"></span>
+                                           
+                                        </td>
+                                        @*extra for date*@
+                                        <td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
+                                            18/04/2018
+                                        </td>
+                                        <td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
+                                            <span ng-bind="item.RequestedQuantity"></span>
+                                        </td>
+                                        <td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
+                                            @*<span ng-bind="item.RemainingQuantity"></span>*@
+                                            {{ ((item.ItemBegBal * 1 ) + (item.LatestQuantity * 1)) - (item.RequestedQuantity * 1) }}
+                                        </td>
+                                    
+                                    </tr>
+                                    <tr ng-show="(itemStocks | filter:searchText).length == 0">
+                                        <td colspan="6" id="locationAction" align="center">No results found...</td>
+                                    </tr>
+                                </tbody> 
+                            </table>
                         </div>
+                        <!-- content ends here -->
                     </div>
+                    @Html.Partial("~/Views/Shared/_Pagination.cshtml")
                 </div>
-    </div>
+            </div>
         </div>
+    </div>
+</div>
+
+
+
+
+

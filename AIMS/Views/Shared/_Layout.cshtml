@@ -8,7 +8,7 @@
 
     @*Stylesheets*@
 
-
+    
     <link href="~/Content/font-awesome.min.css" rel="stylesheet" type="text/css" /><!--Font-awesome stylesheet-->
     <link href="~/Content/animate.min.css" rel="stylesheet" type="text/css"><!--Bootstrap stylesheet-->
     <link rel="stylesheet" href="~/Content/select.css"><!--Select(combo box) stylesheet-->
@@ -60,10 +60,11 @@
             <div class="navbar-collapse collapse navbar-fixed-top" ng-controller="myCtrl2" ng-init="filterActions()">
                 <ul class="nav navbar-nav">
                     <li><a class="navbar-brand" href="/Home/LandingPage"><img src="~/Content/Images/inventory.png" width="340" height="45" /></a></li>
-                    <li ng-if="userRoles.indexOf('Receptionist') !== -1 || userRoles.indexOf('Employee') !== -1 || userRoles.indexOf('PurchasingOfficer') !== -1">
-                        @*@if (WindowsUser.HasUserRoles(new string[] { "Receptionist" }))
+                  <li ng-if="userRoles.indexOf('Receptionist') !== -1 || userRoles.indexOf('Employee') !== -1 || userRoles.indexOf('PurchasingOfficer') !== -1"> </li>
+                        @*if (WindowsUser.HasUserRoles(new string[] { "Receptionist" }))
                             {*@
-                    <li><a href="/Home/LandingPage"><i class="fa fa-home"></i> Home </a></li>
+                    <li><a href="/Home/LandingPage"><i class="fa fa-home"></i> Home </a>
+                    </li>
                     @*}*@
                     @*@if (WindowsUser.HasUserRoles(new string[] { "Employee" }))
                          {
@@ -108,17 +109,18 @@
                     <li class="dropdown" ng-if="userRoles.indexOf('DepartmentHead') !== -1 || userRoles.indexOf('Employee') !== -1">
                         @if (WindowsUser.HasUserRoles(new string[] { "Employee" }))
                         {
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-edit"></i>Supply Request <span class="fa fa-chevron-down"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-edit"></i>Supply Pull-Out <span class="fa fa-chevron-down"></span></a>
                         } <ul class="dropdown-menu">
 
-                            <li ng-if="userRoles.indexOf('Employee') !== -1"><a href="/Request/AddRequest">Add Request</a></li>
-                            <li ng-if="userRoles.indexOf('Employee') !== -1"><a href="/Request/CurrentRequestStatus">Current Request Status</a></li>
+    <li ng-if="userRoles.indexOf('Employee') !== -1"><a href="/Request/AddRequest">Add Pull-Out</a></li>
+    <li ng-if="userRoles.indexOf('Employee') !== -1"><a href="/Request/CurrentRequestStatus">Current Pull-Out Status</a></li>
+    <li ng-if="userRoles.indexOf('Employee') !== -1"><a href="/Request/PulloutList">Pull-Out List</a></li>
 
-                            @if (WindowsUser.HasUserRoles(new string[] { "DepartmentHead" }))
-                            {
-                                <li ng-if="userRoles.indexOf('DepartmentHead') !== -1"><a href="/Request/ViewRequest">Approve Request</a></li>
-                            }
-                        </ul>
+    @if (WindowsUser.HasUserRoles(new string[] { "DepartmentHead" }))
+    {
+        <li ng-if="userRoles.indexOf('DepartmentHead') !== -1"><a href="/Request/ViewRequest">Approve Pull-Out</a></li>
+    }
+</ul>
                     </li>
 
                     @if (WindowsUser.HasUserRoles(new string[] { "Receptionist" }))
