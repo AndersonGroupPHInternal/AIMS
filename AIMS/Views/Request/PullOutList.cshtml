@@ -1,0 +1,67 @@
+﻿<script src="~/MyScripts/request/pull-out.js"></script>
+
+
+<div class="jumbotron" style="margin-top: 100px;">
+    <div ng-controller="myCtrl as ctrl" ng-init="initialize()">
+        <div class="page-title">
+            <div class="title_left">
+                <!-- REQUESTS | ADD REQUEST -->
+                <h3>
+                    Requests | <small>Pull Out List</small>
+                </h3>
+            </div>
+            <br />
+            <br />
+            <br />
+
+            <div>
+                <table class="table table-bordered table-hover" id="tableid">
+                    <thead>
+                        <tr>
+                            <th>Number of Item</th>
+                            <th>Item Name</th>
+                            <th>Quantity</th>
+                            <th>Item Description</th>
+                            <th>Request Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="pull in Pullout | orderBy:predicate:reverse | filter: searchText">
+                            <td>
+                                <span ng-bind="pull.name"></span>
+                            </td>
+                            <td>
+                                <span ng-bind="request.FullName"></span>
+                            </td>
+                            <td>
+                                <span ng-bind="request.LocationName"></span>
+                            </td>
+                            <td>
+                                <span ng-bind="request.RequisitionDateString"></span>
+                            </td>
+                            <td>
+                                <span ng-bind="request.RequiredDateString"></span>
+                            </td>
+                            <td>
+                                <span ng-bind="request.SpecialInstruction"></span>
+                            </td>
+                            <td id="locationAction" align="center">
+                                <button ng-click="showViewModal(request)" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-eye-open"></i> View</button>
+                            </td>
+                        </tr>
+                        <tr ng-show="(requests | filter:searchText).length == 0">
+                            <td colspan="9" id="locationAction" align="center">No results found...</td>
+                        </tr>
+                    </tbody>
+
+
+
+                </table>
+
+
+            </div>
+        </div>
+
+
+    </div>
+</div>

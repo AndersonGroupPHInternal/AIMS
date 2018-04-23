@@ -354,6 +354,7 @@
     <Content Include="MyScripts\others\date-functions.js" />
     <Content Include="MyScripts\request\current-request-status.js" />
     <Content Include="MyScripts\request\current-request.js" />
+    <Content Include="MyScripts\request\pull-outList.js" />
     <Content Include="MyScripts\requisition\all-requisition.js" />
     <Content Include="MyScripts\requisition\partial-delivery.js" />
     <Content Include="MyScripts\requisition\po.js" />
@@ -1253,7 +1254,7 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Scripts\select.min.js.map" />
     <Content Include="Views\Reviewer\Requisition.cshtml" />
-    <Content Include="Views\Inventory\Stocks.cshtml" />
+    <Content Include="Views\Inventory\BeginningBalance.cshtml" />
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Reviewer\OrderProcessing.cshtml" />
     <Content Include="Views\Location\ManageLocation.cshtml" />
@@ -1268,8 +1269,9 @@
     <Content Include="Views\Home\Aboutus.cshtml" />
     <Content Include="Views\Home\LandingPage.cshtml" />
     <Content Include="Views\Reviewer\PO.cshtml" />
-    <Content Include="Views\Inventory\BeginningBalance.cshtml" />
+    <Content Include="Views\Inventory\Stocks.cshtml" />
     <Content Include="Views\Shared\_ReviewRequest.cshtml" />
+    <Content Include="Views\Request\PullOutList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

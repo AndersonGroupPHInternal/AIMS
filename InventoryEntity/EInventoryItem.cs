@@ -22,8 +22,8 @@ namespace InventoryEntity
         public string ItemDescription { get; set; }
 
         public string ItemBegBal { get; set; }
-
-
+        public string ItemCode { get; set; }
+        public object RequestItemId { get; set; }
     }
 }
 
