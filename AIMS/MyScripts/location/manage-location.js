@@ -53,7 +53,7 @@
 
     $scope.addLocation = function (LocationName, LocationAddress) {
         var isValid;
-        isValid = Location != undefined && LocationAddress != undefined;
+        isValid = Location !== undefined && LocationAddress !== undefined;
        
 
         if (isValid) {
@@ -65,7 +65,7 @@
                 }
                 $http.post('/Location/AddNewLocation', data).then(
                     function successCallback(response) {
-                        if (response.data == "LocationExists") {
+                        if (response.data === "LocationExists") {
                             toastr.error("Location already exists. Please try another.", "Can't add new location");
                             $scope.newLocation = '';
                             $scope.newAddress = '';
@@ -97,7 +97,7 @@
             };
             $http.post('/Location/UpdateLocation', data).then(
                 function successCallback(response) {
-                    if (response.data == "SameLocationName") {
+                    if (response.data === "SameLocationName") {
                         toastr.warning("Please input another location name it must be different with the current name.", "Can't change location name");
                         $scope.newLocatioName = '';
                     } else {
@@ -109,8 +109,7 @@
                 }, function errorCallback(response) {
 
                 });
-        } else {
-        }
+        } 
 
     }
 

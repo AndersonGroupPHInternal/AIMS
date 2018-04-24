@@ -41,6 +41,14 @@ namespace AIMS.Controllers
             return View();
         }
 
+        [CustomAuthorize(AllowedRoles = new string[] { "Employee" })]
+        public ActionResult PullOutList()
+        {
+            return View();
+        }
+
+
+
         //GET ALL PENDING REQUEST
         public JsonResult AllPendingRequest()
         {
@@ -413,6 +421,48 @@ namespace AIMS.Controllers
                 //                 "ri.RequestId = @requestid"
                 //            , "tblRequestItem", parameters);
                 return Json(requestItem);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.ToString());
+            }
+        }
+
+        public JsonResult Pullout(int requestID)
+        {
+            try
+            {
+                List<Pullout> pullout = new List<Pullout>();//Exam = Exam model
+                using (var context = new InventoryDbContext())
+                {
+                    var displayItem = from req in context.Request
+                                      join reqItem in context.RequestItem
+                                        on req.RequestId equals reqItem.RequestId
+                                      join inv in context.InventoryItem
+                                        on reqItem.InventoryItemId equals inv.InventoryItemId
+                                      join uom in context.UnitOfMeasurement
+                                        on inv.UnitOfMeasurementId equals uom.UnitOfMeasurementId
+                                      where reqItem.RequestId == requestID
+                                      select new
+                                      {
+                                          InventoryItemId = inv.InventoryItemId,
+                                          ItemName = inv.ItemName,
+                                          UnitDescription = uom.Description,
+                                          Quantity = reqItem.Quantity,
+                                          SpecialInstruction = req.SpecialInstruction,
+                                          Requestdate = req.RequestDate
+                                      };
+                    pullout = displayItem.Select(
+                        ri => new Pullout
+                        {
+                            InventoryItemID = ri.InventoryItemId,
+                            ItemName = ri.ItemName,
+                            UnitOfMeasurement = ri.UnitDescription,
+                            Quantity = ri.Quantity,
+                            RequestDate = ri.Requestdate,
+                        }).ToList();
+                }
+                return Json(pullout);
             }
             catch (Exception ex)
             {

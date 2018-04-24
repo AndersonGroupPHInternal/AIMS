@@ -27,21 +27,27 @@ namespace AIMS.Models
 
         public string LastRequestedDateString => (LastRequestedDate.Value == default(DateTime)) ?
             "No Transaction yet":
-            LastRequestedDate.Value.ToString("MMMM dd, yyyy");
+            LastRequestedDate.Value.ToString("MM/dd/yyyy");
+
+     
 
         public string LastRequestedName { get; set; }
-      
+        //public int RemainingQuantity { get; set; }
         public int RemainingQuantity
         {
             get
             {
-                return (TotalStock - RequestedQuantity);
+                return (TotalStock + RequestedQuantity);
             }
         }
         public string ItemCode { get; set; }
         public string ItemBegBal { get; set; }
 
+        public int LatestQuantity { get; set; }
+
+
         public string LatestQuantity { get; set; }
+
 
     }
 }
