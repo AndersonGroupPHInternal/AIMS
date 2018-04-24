@@ -1,4 +1,4 @@
-﻿app.controller("myCtrl", function ($scope, $http) {
+app.controller("myCtrl", function ($scope, $http) {
     var vm = this;
     $scope.isItemExist;
 
@@ -11,7 +11,7 @@
             UnitOfMeasurement: '',
             UnitPrice: 0
         }];//Initialize default item/
-    }
+    };
     vm.existingHasVATs = [
         { name: 'Vatable' },
         { name: 'Non-Vatable' },
@@ -20,7 +20,7 @@
     $scope.pageChange = function (page) {
         $scope.page = page;
         $scope.loadpage(page.PageNumber, page.PageStatus);
-    }
+    };
 
     $scope.loadpage = function (pagenumber, pagestatus) {
         var data = {
@@ -42,7 +42,11 @@
             },
             function errorCallback(response) {
             });
+
     }
+
+    };
+
 
 
     //For reload all item again
@@ -65,7 +69,11 @@
             function errorCallback(response) {
 
             });
+
     }
+
+    };
+
     //add item options
     $scope.addNewItem = function () {
         var newItemNo = $scope.items.length + 1;
@@ -88,7 +96,7 @@
         $scope.supplierInfo = angular.copy(supplier);
         var data = {
             Supplier: supplier
-        }
+        };
         $http.post("/Reviewer/DisplaySupplierItem", data).then(
             function successCallback(response) {
                 $scope.supplierItems = response.data;
@@ -102,27 +110,30 @@
             }
         );
 
+
     }
+
+    };
 
     //Close supplier info modal
     $scope.closeSupplierInformation = function () {
         $("#supplierInfoModal").modal("hide");
-    }
+    };
 
     //Show supplier Provider modal
     $scope.showSupplierProvider = function () {
         $("#provideSupplierModal").modal("show");
-    }
+    };
     //Close Supplier Provider modal
     $scope.closeSupplierProvider = function () {
         $("#provideSupplierModal").modal("hide");
-    }
+    };
     //Add new Supplier
     $scope.addSupplierProvider = function (tinNumber, supplierName, address, contactPerson, contactNo, email, hasVAT, wholdingTax) {
         if ($scope.tinNumber === undefined || $scope.supplierName === undefined || $scope.address === undefined || $scope.contactPerson === undefined || $scope.contactNo === undefined || $scope.email === undefined) {
             toastr.warning("There must be no empty fileds all are important.", "You must fill out all the fileds");
         } else {
-            var conf = confirm("Are you sure you want to add this supplier?")
+            var conf = confirm("Are you sure you want to add this supplier?");
 
             if (conf) {
                 var data =
@@ -153,7 +164,7 @@
                 );
             }
         }
-    }
+    };
     //Update SUpplier's Item Unit Price
     $scope.updateUnitPrice = function (updateUnitPriceItems) {
         var addItemConfirm = confirm('Are you sure about the item\'s unit price?');
@@ -174,34 +185,34 @@
                 function errorCallback(response) {
                 });
         }
-    }
+    };
     //Show update Unit Price modal
     $scope.showUpdateUnitPriceModal = function (supplierItems) {
         $scope.updateUnitPriceItems = angular.copy(supplierItems);
         //$("#supplierInfoModal").modal("hide");
         $("#updateUnitPriceModal").modal("show");
 
-    }
+    };
     //close update unit price modal
     $scope.closeUpdateUnitPrice = function () {
         $("#updateUnitPriceModal").modal("hide");
         $("#supplierInfoModal").modal("show");
-    }
+    };
 
     //Show Update Details modal
     $scope.updateSupplierDetailsModal = function (supplierDetails) {
         $scope.supplierDetails = angular.copy(supplierDetails);
         $("#updateSupplierDetailsModal").modal("show");
-    }
+    };
     //Close Update Details modal
     $scope.closeUpdateSupplierDetailsModal = function () {
         $("#updateSupplierDetailsModal").modal("hide");
-    }
+    };
     //Function to update supplier details
     $scope.updateSupplierDetails = function (supplierDetails) {
         var data = {
             supplier: supplierDetails
-        }
+        };
         $http.post("/Reviewer/UpdateSupplierDetails", data).then(
             function successCallback(response) {
                 $scope.supplier = response.data;
@@ -215,7 +226,11 @@
 
             }
         );
+
     }
+
+    };
+
 
 
     //Function to display add new item modal
@@ -226,7 +241,11 @@
             .then(
             function successCallback(response) {
                 $scope.existingUOM = response.data;
+
                 vm.existingUOMsx = []
+
+                vm.existingUOMsx = [];
+
                 for (var i in $scope.existingUOM) {
                     var uom = $scope.existingUOM[i];
                     vm.existingUOMsx.push({ UnitOfMeasurementID: '' + uom['UnitOfMeasurementID'], Description: uom['Description'] });
@@ -234,17 +253,31 @@
             },
             function errorCallback(response) {
 
+
             });
 
-    }
+
+
+            });
+
+    };
     //Function to close add new item modal
     $scope.closeAddItemModal = function () {
         $("#addItemModal").modal("hide");
-    }
+    };
     //add new item in inventory to database
 
     $scope.addInventoryItem = function (newBegBal, newItemName, unitOfMeasurementID, newItemCode, newItemLimit) {
+
         var isValid = newBegBal !== undefined && newItemName !== undefined && unitOfMeasurementID !== undefined && newItemCode !== undefined;
+
+        var isValid = newBegBal != undefined && newItemName != undefined && unitOfMeasurementID != undefined && newItemCode != undefined;
+
+
+    $scope.addInventoryItem = function (newItemName, unitOfMeasurementID, newItemCode, newItemLimit) {
+        var isValid = newItemName != undefined && unitOfMeasurementID != undefined && newItemCode != undefined && newItemLimit != undefined;
+
+
 
         if (isValid) {
             var addItemConfirm = confirm('Are you sure to add this new item?');
@@ -286,8 +319,47 @@
         }
         else {
             toastr.warning("Please fill out all data.", "Could not be add item.");
+
+
+
+    $scope.addInventoryItem = function (newItemName, unitOfMeasurementID, newItemCode, newBegBal) {
+        var addItemConfirm = confirm('Are you sure to add this new item?');
+        if (addItemConfirm) {
+            var data = {
+                newItemName: newItemName,
+                newItemCode: newItemCode,
+                newBegBal: newBegBal,
+                unitOfMeasurementID: (unitOfMeasurementID === null ? 0 : unitOfMeasurementID),
+               
+            };
+            $http.post('/Requisition/AddNewItem', data)
+                .then(
+            function successCallback(response) {
+                if (response.data === "ItemExist") {
+                    $scope.newItemName = '';
+                    $scope.newItemCode = '';
+                    $scope.newBegBal = '';
+                    toastr.warning("There must be no the same item it must be unique.", "Item is already Exists");
+                    //$scope.ctrl.forNewItem = [];
+                } else {
+                    $scope.newItemName = '';
+                    $scope.newItemCode = '';
+                    $scope.newBegBal = '';
+                    $scope.initialize();
+                    $("#addItemModal").modal("hide");
+
+                    toastr.success("You've successfully added a new item/s in the inventory", "New item created");
+                    //$scope.custom = true;
+                    //$scope.toggleText = "Existing Item"
+                    //$scope.toggleStyle = "btn btn-primary"
+                }
+            },
+            function errorCallback(response) {
+            });
+
         }
-    }
+    };
+
 
 
         //Display add new supplier item modal
@@ -297,7 +369,33 @@
                 UnitPrice: 0
             }];//Initialize default item/
             $("#addSupplierItemModal").modal("show");
-            //$("#supplierInfoModal").modal("hide");
+
+    //Display add new supplier item modal
+    $scope.showAddNewItem = function () {
+        $scope.items = [{
+            UnitOfMeasurement: '',
+            UnitPrice: 0
+        }];//Initialize default item/
+        $("#addSupplierItemModal").modal("show");
+        //$("#supplierInfoModal").modal("hide");
+    };
+    //Close add supplier item modal
+    $scope.closeAddSupplierItem = function () {
+        $scope.items = [{
+            UnitOfMeasurement: '',
+            UnitPrice: 0
+        }];//Initialize default item/
+        $("#addSupplierItemModal").modal("hide");
+        $("#supplierInfoModal").modal("show");
+    };
+    //Add new supplier item
+    $scope.addNewSupplierItem = function () {
+
+        var validation = true;
+        for (var i in $scope.items) {
+            var item = $scope.items[i];
+            validation = (item['Quantity'] !== 0 && item['UnitOfMeasurement'] !== "");
+
         }
         //Close add supplier item modal
         $scope.closeAddSupplierItem = function () {
@@ -311,11 +409,43 @@
         //Add new supplier item
         $scope.addNewSupplierItem = function () {
 
+
             var validation = true;
             for (var i in $scope.items) {
                 var item = $scope.items[i];
                 validation = (item['Quantity'] !== 0 && item['UnitOfMeasurement'] !== "");
+
+        if (!validation) {
+            toastr.warning("Please fill out all fields.", "Data cannot be empty.");
+        } else {
+            var addItemConfirm = confirm('Add new item to this supplier?');
+            if (addItemConfirm) {
+                var data = {
+                    SupplierID: $scope.supplierInfo.SupplierID,
+                    supplierItemList: $scope.items
+                };
+                $http.post('/Reviewer/AddSupplierItem', data)
+                    .then(
+                    function successCallback(response) {
+                        if (response.data === true) {
+                            $scope.unitPrice = 0;
+                            toastr.warning("There must be no the same item it must be unique.", "Supplier item is already Exists");
+                            //$scope.ctrl.forNewItem = [];
+                        } else {
+                            $scope.unitPrice = 0;
+                            $scope.initialize();
+                            $scope.items = [{ UnitOfMeasurement: '', UnitPrice: 0 }];//Initialize default item/
+                            toastr.success("You've successfully added a new item/s in this supplier.", "New item added to supplier");
+                            $("#addSupplierItemModal").modal("hide");
+                            $scope.showSupplierInformation($scope.supplierInfo);
+                            $("#supplierInfoModal").modal("show");
+                        }
+                    },
+                    function errorCallback(response) {
+                    });
+
             }
+
 
             if (!validation) {
                 toastr.warning("Please fill out all fields.", "Data cannot be empty.");
@@ -348,6 +478,13 @@
                 }
             }
 
+    };
+    //close supplier item modal
+    $scope.closeSupplierItemModal = function () {
+        $("#addSupplierItemModal").modal("hide");
+    };
+
+
         }
         //close supplier item modal
         $scope.closeSupplierItemModal = function () {
@@ -355,9 +492,26 @@
         }
 
 
+
         //Display UOM by selecting in combo box
         $scope.setItemUOM = function (item, unitOfMeasure) {
             item.UnitOfMeasurement = unitOfMeasure;
+
+    //Display UOM by selecting in combo box
+    $scope.setItemUOM = function (item, unitOfMeasure) {
+        item.UnitOfMeasurement = unitOfMeasure;
+        $scope.isItemExist = true;
+    };
+    //Check if item is existing
+    function itemExists(item) {
+        return vm.existingItemsx.some(function (el) {
+            return el.ItemName.toLowerCase().includes(item.toLowerCase());
+        });
+    }
+    //key press function to determine if item is existing
+    $scope.key = function (data) {
+        if (itemExists(data)) {
+
             $scope.isItemExist = true;
         }
         //Check if item is existing
@@ -366,6 +520,7 @@
                 return el.ItemName.toLowerCase().includes(item.toLowerCase());
             });
         }
+
         //key press function to determine if item is existing
         $scope.key = function (data) {
             if (itemExists(data)) {
@@ -425,4 +580,40 @@
         }
 
     
+
+    };
+    //Add new Unit of Measurement to database
+    $scope.addNewUOM = function () {
+        vm.existingUOMsx = [];
+        var data = {
+            unitDescription: $scope.tempNewUOM
+        };
+        $http.post('/Requisition/AddNewUnitOfMeasurement', data)
+            .then(
+            function successCallback(response) {
+                if (response.data.length === 0) {
+                    $http.post('/Requisition/AllUnitOfMeasurement')//gett all existing UnitOfMeasurement(UOM)
+                        .then(
+                        function successCallback(response) {
+                            $scope.existingUOM = response.data;
+                            for (var i in $scope.existingUOM) {
+                                var uom = $scope.existingUOM[i];
+                                vm.existingUOMsx.push({ UnitOfMeasurementID: '' + uom['UnitOfMeasurementID'], Description: uom['Description'] });
+                            }
+                        },
+                        function errorCallback(response) {
+
+                        });
+                    toastr.success("You've successfully added a new unit of description.", "New Unit of Description is added");
+                }
+            },
+            function errorCallback(response) {
+
+            });
+    };
+
+    $scope.isUomSelected = function () {
+        $scope.forCheckUOM = true;
+    };
+
 });
