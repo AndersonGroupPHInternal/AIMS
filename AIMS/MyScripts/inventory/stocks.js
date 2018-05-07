@@ -35,7 +35,7 @@
         });
     }
 
-    $scope.validation = function (inventoryItemId, itemName, totalStock, requestedQuantity, newItemLimit) {
+    $scope.validation = function (inventoryItemId, itemName, totalStock, requestedQuantity) {
         var isValid;
 
 

@@ -4,6 +4,7 @@ using AccountsWebAuthentication.Helper;
 using AIMS.Classes;
 using AIMS.Models;
 using ElectronicMailNotification.Models;
+using MvcRazorToPdf;
 using InventoryContext;
 using InventoryEntity;
 using System;
@@ -57,6 +58,17 @@ namespace AIMS.Controllers
             return View();
         }
 
+        public ActionResult PurchaseOrderPDF()
+        {
+            PurchaseOrder model = (PurchaseOrder)Session["purchaseOrderData"];
+            var date = String.Format("{0:yyyyMMdd}", DateTime.Now);
+
+            return new PdfActionResult(model)
+            {
+                FileDownloadName = date + "-PurchaseOrder" + ((model.RequisitionID + 1).ToString("D4")) + ".pdf"
+            };
+
+        }
         //DISPLAY ALL ITEMS FROM INVENTORY
         public JsonResult AllItem()
         {
@@ -1091,6 +1103,16 @@ namespace AIMS.Controllers
             }
             return Json(string.Empty);
         }
+
+
+        //DOWNLOAD PDF
+        [HttpPost]
+        public ActionResult DownloadPdf(PurchaseOrder purchaseOrder)
+        {
+            Session["purchaseOrderData"] = purchaseOrder;
+            return RedirectToAction("PurchaseOrderPDF", "Reviewer");
+        }
+
         //----------------------------------- DELIVERED REQUISITION ---------------------------------------
         [HttpPost]
         public JsonResult DeliverRequisition(int requisitionID, Requisition requisition, PartialDelivery partialDelivery)
@@ -1256,5 +1278,11 @@ namespace AIMS.Controllers
         //    }
         //}
         //=====LOAD TOTAL PAGES======//
+
+
+
     }
+
+
+
 }
