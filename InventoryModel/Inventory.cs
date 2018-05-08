@@ -25,9 +25,9 @@ namespace AIMS.Models
         public string UnitOfDescription { get; set; }
         public DateTime?  LastRequestedDate { get; set; }
 
-        public string LastRequestedDateString => (LastRequestedDate.Value == default(DateTime)) ?
-            "No Transaction yet":
-            LastRequestedDate.Value.ToString("MM/dd/yyyy");
+        //public string LastRequestedDateString => (LastRequestedDate.Value == default(DateTime)) ?
+        //    "No Transaction yet":
+        //    LastRequestedDate.Value.ToString("dd/MM/yyyy");
 
      
 

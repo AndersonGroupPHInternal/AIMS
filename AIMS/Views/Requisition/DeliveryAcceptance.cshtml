@@ -219,7 +219,9 @@
                                         <div class="modal-footer">
                                             <button class="btn btn-success btn-sm" ng-click="acceptFunction(requisition.RequisitionID,requiredDate,supplierInvoiceNo,deliveryReceiptNo,ctrl.SupplierID)">
                                                 <i class="glyphicon glyphicon-ok"></i> Delivered
+                                                
                                             </button>
+                                            <button class="btn btn-primary btn-sm" ng-click="downloadPdf(ctrl.SupplierID)"><i class="fa fa-download"></i>&nbsp; Download  </button>
                                             <button class="btn btn-danger btn-sm" ng-click="closeViewModal()"><i class="glyphicon glyphicon-remove"></i> Cancel</button>
                                         </div>
                                     </div>
