@@ -424,8 +424,6 @@
         //} else {
         //    toastr.warning("There are no supplier that is selected. Please select one.", "Please select supplier");
         //}
-
-
     }
 
     $scope.allSelected = false;
