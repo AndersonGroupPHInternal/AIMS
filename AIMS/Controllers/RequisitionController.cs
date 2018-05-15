@@ -965,8 +965,6 @@ namespace AIMS.Controllers
                             UnitOfMeasurementId = unitOfMeasurementID,
                             ItemCode = newItemCode,
 
-                            ItemBegBal = newBegBal,
-
                             ItemBegBal = newBegBal
 
                         };

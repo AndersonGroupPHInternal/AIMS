@@ -46,7 +46,7 @@ namespace AIMS.Models
         public int LatestQuantity { get; set; }
 
 
-        public string LatestQuantity { get; set; }
+        //public string LatestQuantity { get; set; }
 
 
     }

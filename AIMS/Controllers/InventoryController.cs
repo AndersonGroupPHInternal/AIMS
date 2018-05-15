@@ -159,7 +159,7 @@ namespace AIMS.Controllers
 
                               LatestQuantity = remainingQtyj == null ? 0 : remainingQtyj.ReceiveQty,
 
-                              LatestQuantity = rqy.Quantity.ToString(),
+                            //  LatestQuantity = rqy.Quantity.ToString(),
 
                               LastRequestedDate = requestedQtyj.LastRequestedDate,
 
