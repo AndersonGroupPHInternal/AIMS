@@ -54,42 +54,7 @@
             });
     }
 
-    //Download a pdf
-    $scope.downloadPdf = function (supplierId) {
-        var isOkay = true;
-        if (supplierId !== undefined) {
-            //for (var i = 0; i < $scope.requisitionItems.length; i++) {
-            //    if ($scope.requisitionItems[i].UnitPrice == 0) {
-            //        isOkay = false;
-            //    }
-            //}
-            //if (isOkay) {
-            var data = {
-                SupplierID: $scope.supplierx[0].SupplierID,
-                SupplierName: $scope.supplierx[0].SupplierName,
-                SupplierAddress: $scope.supplierx[0].Address,
-                ContactPerson: $scope.supplierx[0].ContactPerson,
-                ContactNo: $scope.supplierx[0].ContactNo,
-                SupplierEmail: $scope.supplierx[0].Email,
-                Vatable: $scope.supplierx[0].Vatable,
-                WholdingTax: $scope.supplierx[0].WholdingTax,
-                RequisitionID: $scope.requisition.RequisitionID,
-                LocationName: $scope.requisition.LocationName,
-                LocationAddress: $scope.requisition.LocationAddress,
-                RequiredDate: $scope.requisition.RequiredDateString,
-                RequisitionItems: $scope.requisitionItems,
-                DeliveryCharge: $scope.deliveryCharge
-            }
-            $http.post('/Reviewer/DownloadPdf', data)
-                .then(window.open('/Reviewer/PurchaseOrderPDF'));
-
-        } else {
-            toastr.warning("There must be no zero (0) value of unit price.", "Invalid Unit Price");
-        }
-        //} else {
-        //    toastr.warning("There are no supplier that is selected. Please select one.", "Please select supplier");
-        //}
-    }
+    
 
     $scope.showViewModal = function (requisition) {
         $scope.requisition = angular.copy(requisition);
