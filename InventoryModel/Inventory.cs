@@ -20,6 +20,15 @@ namespace AIMS.Models
         public int InventoryItemID { get; set; }
         public string ItemName { get; set; }
         public int TotalStock { get; set; }
+
+        
+          public int EndingBal 
+        {
+            get
+            {
+                return ((ItemBegBal + LatestQuantity) - (RequestedQuantity))  ;
+            }
+        }
         public int RequestedQuantity { get; set; }
         public string NewItemLimit { get; set; }
         public string UnitOfDescription { get; set; }
@@ -29,7 +38,13 @@ namespace AIMS.Models
             "No Transaction yet":
             LastRequestedDate.Value.ToString("MM/dd/yyyy");
 
-     
+
+        
+        public DateTime?  DeliveryDate { get; set; }
+
+        public string DeliveryDateString => (DeliveryDate.Value == default(DateTime)) ?
+           "No Transaction yet" :
+           DeliveryDate.Value.ToString("MM/dd/yyyy");
 
         public string LastRequestedName { get; set; }
         //public int RemainingQuantity { get; set; }
@@ -41,12 +56,12 @@ namespace AIMS.Models
             }
         }
         public string ItemCode { get; set; }
-        public string ItemBegBal { get; set; }
+        public int ItemBegBal { get; set; }
 
         public int LatestQuantity { get; set; }
 
 
-        public string LatestQuantity { get; set; }
+        //public string LatestQuantity { get; set; }
 
 
     }

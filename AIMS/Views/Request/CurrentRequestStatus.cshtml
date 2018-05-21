@@ -6,7 +6,7 @@
             <div class="title_left">
                 <!-- REQUISITION | APPROVE REQUISITION -->
                 <h3>
-                    Request | <small>Completed Pull-Out Status</small>
+                    Request | <small>Completed Request Status</small>
                 </h3>
             </div>
             <div class="title_right">
@@ -63,16 +63,32 @@
                                             <span ng-bind="request.SpecialInstruction"></span>
                                         </td>
                                         @*<td>
-                                                <span ng-bind="request.RequisitionType"></span>
-                                            </td>*@
+            <span ng-bind="request.RequisitionType"></span>
+        </td>*@
                                         <td>
                                             <span ng-bind="request.Status"></span>
                                         </td>
+
+
 
                                         <td id="locationAction" align="center">
                                             <button ng-click="showViewModal(request)" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-eye-open"></i> View</button>
                                         </td>
 
+                                        <td>
+                                            <button ng-click="deleteitem(request)">
+                                               
+                                                <i class="fa fa-trash-o"></i> 
+                                               
+                                            </button>
+                                        </td>
+
+
+                                        @*<td>
+                                            <button ng-click="deleteitem(request)"  class="btn btn-danger btn-sm">
+                                                Delete
+                                            </button>
+                                        </td>*@
                                     </tr>
                                     <tr ng-show="(requests | filter:searchText).length == 0">
                                         <td colspan="9" id="locationAction" align="center">No results found...</td>
@@ -162,8 +178,8 @@
                                                         <td>
                                                             <span ng-bind="item.Description"></span>
                                                         </td>
-
-                                                </tbody>
+                                                       
+</tbody>
                                             </table>
 
                                         </div>

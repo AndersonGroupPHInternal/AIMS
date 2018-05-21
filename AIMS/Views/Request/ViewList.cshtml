@@ -1,0 +1,94 @@
+﻿<script type="text/javascript" src="~/MyScripts/request/viewlist.js"></script>
+
+
+<div class="jumbotron" style="margin-top: 100px;">
+    <div ng-controller="myCtrl" ng-init="initialize()">
+        <div class="page_Request">
+            <div class="page-title">
+                <div class="title_left">
+
+                    <h3>
+                        Requests | <small>List Request</small>
+                    </h3>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <a style="margin: 50px 0px 30px 20px;" class="btn btn-success btn-sm" href="/Request/Create">Add Request</a>
+
+                <div class="col-sm-12">
+                    <table class="table table-hover table-sm table-bordered ">
+                        <thead class="t">
+                            <tr class="thead-inverse">
+
+                                <th ng-click="predicate='Id'; reverse=!reverse">Reference ID</th>
+                                <th style="text-align:center" ng-click="predicate='Name'; reverse=!reverse"> Name</th>
+                                <th style="text-align:center" ng-click="predicate='Location'; reverse=!reverse"> Location</th>
+                                <th style="text-align:center" colspan="2" ng-click="predicate='RequestDate'; reverse=!reverse">Date</th>
+
+                                <th style="text-align:center" ng-click="predicate='Id'; reverse=!reverse">Item</th>
+                                <th style="text-align:center" ng-click="predicate='Id'; reverse=!reverse">Quantity</th>
+                                <th style="text-align:center" ng-click="predicate='Id'; reverse=!reverse">Description</th>
+                                <th style="text-align:center" colspan="2" ng-click="predicate='RequestedQuantity'; reverse=!reverse">Action</th>
+
+                            </tr>
+                            <tr>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td>Requested Date</td>
+                                <td>Required Date</td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="req in ViewReqs | orderBy:predicate:reverse | filter: searchText">
+                                <td>
+                                        {{$index+1}}
+                                </td>
+                                <td>
+                                    <span ng-bind="req.RequestName"></span>
+                                </td>
+                                <td>
+                                    <span ng-bind="req.RequestLocation"></span>
+                                </td>
+                                <td>
+                                    <span ng-bind="req.RequisitionDateStrings"></span>
+                                </td>
+                                <td>
+                                    <span ng-bind="req.RequiredDateStrings"></span>
+                                </td>
+                                <td>
+                                    <span ng-bind="req.RequestItem"></span>
+                                </td>
+                                <td>
+                                    <span ng-bind="req.RequestQuanlity"></span>
+                                </td>
+                                <td>
+                                    <span ng-bind="req.RequestDescription"></span>
+                                </td>
+                                <td>
+                                    <a class="btn btn-info btn-sm"> Edit</a>
+                                </td>
+
+                                <td>
+                                    <a class="btn btn-danger btn-sm"> Delete</a>
+                                </td>
+
+                            </tr>
+                            <tr ng-show="(ViewReqs | filter:searchText).length == 0">
+                                <td colspan="9" id="locationAction" align="center">No results found...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

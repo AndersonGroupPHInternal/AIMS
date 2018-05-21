@@ -10,7 +10,7 @@ app.controller("myCtrl", function ($scope, $http) {
     $scope.pageChange = function (page) {
         $scope.page = page;
         $scope.loadpage(page.PageNumber, page.PageStatus);
-    };
+    }
     $scope.loadpage = function (pagenumber, pagestatus) {
         var data = {
             pagenumber: pagenumber,
@@ -37,14 +37,12 @@ app.controller("myCtrl", function ($scope, $http) {
 
     $scope.validation = function (inventoryItemId, itemName, ItemDescription, ItemCode, totalStock, requestedQuantity, newItemLimit) {
         var isValid;
-
-
-
     };
 
-    $scope.validation = function (inventoryItemId, itemName, totalStock, requestedQuantity, newItemLimit) {
-        var isValid;
+    //$scope.validation = function (inventoryItemId, itemName, totalStock, requestedQuantity, newItemLimit) {
+    //    var isValid;
 
+    //}
 
 
 });

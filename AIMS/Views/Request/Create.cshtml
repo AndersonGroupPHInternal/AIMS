@@ -1,0 +1,19 @@
+﻿@using AIMS.Models;
+@model Request
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="row" style="margin-top:20%;">
+    <div class="col-sm-12">
+        <form action="~/Request/Create" method="post">
+            @{
+                Html.RenderPartial("_Request", Model);
+            }
+        </form>
+    </div>
+</div>
+
+
+ 

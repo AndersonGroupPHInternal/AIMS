@@ -81,4 +81,36 @@
         $("#viewModal").modal("show");
     }
 
+    this.DeleteById = function (request) {
+        var response = $http({
+            method: "post",
+            url: '/Request/Delete',
+            params: {
+                id: JSON.stringify(request)
+            }
+        });
+        return response;
+    }  
+
+    vm.delete = deleteRow;
+    $scope.deleteitem = function deleteRow(request) {
+        // Delete some data and call server to make changes...  
+        var requests = confirm("Are you sure want to delete this id:" + request.RequestID);
+        if (requests) {
+            var response = EmpCrudservice.DeleteById(request.RequestID);
+            response.then(function (d) {
+                var result = d.data;
+                alert(result);
+                // Then reload the data so that DT is refreshed  
+                
+
+            }, function (err) {
+                alert("error in deleting emp");
+                console.log(err.data);
+            });
+        }
+
+    }  
+   
+    
 });
