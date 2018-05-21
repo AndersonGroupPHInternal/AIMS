@@ -1,5 +1,5 @@
-﻿
-<script type="text/javascript" src="~/MyScripts/inventory/stocks.js"></script>
+
+@*<script type="text/javascript" src="~/MyScripts/inventory/stocks.js"></script>
 
 <div class="jumbotron" style="margin-top: 100px;">
     <div ng-controller="myCtrl" ng-init="initialize()">
@@ -27,6 +27,7 @@
             <p><span class="badge bg-red">&nbsp</span><small><small>&nbsp;&nbsp; Items whose quantity are less than 10 </small></small></p>   
         </div>
 
+
                 <div class="clearfix"></div>
                 <div class="row">
                     <div class="col-md-12">
@@ -53,9 +54,9 @@
                                                 <th ng-click="predicate='ItemName'; reverse=!reverse">Item Name<br><br></th>
                                                 <th ng-click="predicate='ItemDescription'; reverse=!reverse">Item Description<br><br></th>
                                                 <th ng-click="predicate='UnitOfDescription'; reverse=!reverse">Unit Of Description<br><br></th>
-                                                @*<th ng-click="predicate='TotalStock'; reverse=!reverse">Total Purchased<br>Quantity</th>*@
+                                                <th ng-click="predicate='TotalStock'; reverse=!reverse">Total Purchased<br>Quantity</th>
                                                 <th ng-click="predicate='RemainingQuantity'; reverse=!reverse">Total Remaining<br>Quantity<br></th>
-                                                @*<th ng-click="predicate='RequisitionDate'; reverse=!reverse">Date of Last Transaction<br><br></th>*@
+                                                <th ng-click="predicate='RequisitionDate'; reverse=!reverse">Date of Last Transaction<br><br></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -72,9 +73,9 @@
                                                 <td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
                                                     <span ng-bind="item.UnitOfDescription"></span>
                                                 </td>
-                                                @*<td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
+                                                <td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
                                                     <span ng-bind="item.TotalStock"></span>
-                                                </td>*@
+                                                </td>
                                                 <td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
                                                     <span ng-bind="item.RemainingQuantity"></span>
                                                 </td>
@@ -88,8 +89,66 @@
                                 <!-- content ends here -->
                             </div>
                             @Html.Partial("~/Views/Shared/_Pagination.cshtml")
+
+                                    </tr>
+                                </thead> 
+                                <tbody>
+                                    <tr ng-repeat="item in itemStocks | orderBy:predicate:reverse | filter: searchText">
+                                        <td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
+                                            <span ng-bind="item.InventoryItemID"></span>
+                                        </td>
+                                        <td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
+
+                                            <span ng-bind="item.ItemName"></span>
+                                        </td>
+                                        <td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
+                                            <span ng-bind="item.ItemCode"></span>
+
+                                            <span ng-bind="item.ItemName"></span> 
+                                        </td>
+                                        <td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
+                                            <span ng-bind="item.ItemCode"></span>
+                                        </td>
+                                        <td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
+                                            <span ng-bind="item.ItemBegBal"></span>
+                                        </td>
+                                        <td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
+                                            <span ng-bind="item.TotalStock"></span>
+                                        </td>
+                                        <td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
+                                            <span ng-bind="item.RequestedQuantity"></span>
+
+                                        </td>
+                                        <td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
+                                            <span ng-bind="item.ItemBegBal"></span>
+                                        </td>
+                                        <td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
+                                            <span ng-bind="item.RequestedQuantity"></span>
+
+                                        </td>
+
+                                        <td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
+                                            {{  (item.RequestedQuantity) - ((item.RequestedQuantity) - (item.LatestQuantity))  }}
+                                            <span ng-bind="item.LatestQuantity"></span>
+                                        </td>
+                                        <td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
+                                            <span ng-bind="item.RemainingQuantity"></span>
+                                            {{(item.ItemBegBal) -  (item.RequestedQuantity)  }}
+                                        </td>
+
+
+                                    </tr>
+                                    <tr ng-show="(itemStocks | filter:searchText).length == 0">
+                                        <td colspan="6" id="locationAction" align="center">No results found...</td>
+                                    </tr>
+                                </tbody> 
+                            </table>
+
                         </div>
                     </div>
                 </div>
     </div>
+
         </div>
+
+</div>*@

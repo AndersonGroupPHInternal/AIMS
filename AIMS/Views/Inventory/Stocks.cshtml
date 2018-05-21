@@ -1,5 +1,5 @@
-﻿<script type="text/javascript" src="~/MyScripts/inventory/stocks.js"></script>
 
+<script type="text/javascript" src="~/MyScripts/inventory/stocks.js"></script>
 
 <div class="jumbotron" style="margin-top: 100px;">
     <div ng-controller="myCtrl" ng-init="initialize()">
@@ -44,11 +44,12 @@
                                         <th ng-click="predicate='ItemName'; reverse=!reverse">Item Name<br></th>
                                         <th ng-click="predicate='ItemCode'; reverse=!reverse">Item Description<br></th>
                                         <th ng-click="predicate='ItemBegBal'; reverse=!reverse">Beginning Balance</th>
-                                        <th colspan="2" ng-click="predicate='TotalStock'; reverse=!reverse">Received Purchased </th>
+                                        <th colspan="2" ng-click="predicate='TotalStock'; reverse=!reverse">Received Quantity </th>
                                         <th colspan="2" ng-click="predicate='RequestedQuantity'; reverse=!reverse">Pull-out Quantity  </th>
                                         <th ng-click="predicate='RemainingQuantity'; reverse=!reverse">Ending Balance</th>
 
                                     </tr>
+
 
                                     <tr>
                                         <td> </td>
@@ -103,17 +104,13 @@
                                     </tr>
                                 </tbody> 
                             </table>
-                        </div>
-                        <!-- content ends here -->
+
+                            </div>
+                            @Html.Partial("~/Views/Shared/_Pagination.cshtml")
                     </div>
-                    @Html.Partial("~/Views/Shared/_Pagination.cshtml")
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-
-
 

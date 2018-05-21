@@ -1,10 +1,10 @@
-﻿app.controller("myCtrl", function ($scope, $http) {
+app.controller("myCtrl", function ($scope, $http) {
     $scope.requisition;
     $scope.initialize = function () {
-      
+
         $scope.page;
         $scope.loadpage(1, true);
-    }
+    };
 
     //======LOAD USERS IN PAGE========//
     $scope.pageChange = function (page) {
@@ -24,20 +24,22 @@
             }
         );
         $http.post('/Inventory/LoadPages', data).then(
-        function successCallback(response) {
-            $scope.pages = response.data;
-            
-            if (!$scope.page) {
-                $scope.page = $scope.pages[Object.keys($scope.pages)[0]];
-            }
-        },
-        function errorCallback(response) {
-        });
-    }
+            function successCallback(response) {
+                $scope.pages = response.data;
 
-    $scope.validation = function (inventoryItemId, itemName, totalStock, requestedQuantity, newItemLimit) {
+                if (!$scope.page) {
+                    $scope.page = $scope.pages[Object.keys($scope.pages)[0]];
+                }
+            },
+            function errorCallback(response) {
+            });
+    };
+
+    $scope.validation = function (inventoryItemId, itemName, ItemDescription, ItemCode, totalStock, requestedQuantity, newItemLimit) {
         var isValid;
+    };
 
-
-    }
+    //$scope.validation = function (inventoryItemId, itemName, totalStock, requestedQuantity, newItemLimit) {
+    //    var isValid;
+    //};
 });

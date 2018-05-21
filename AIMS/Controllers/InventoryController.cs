@@ -1,4 +1,4 @@
-﻿using AIMS.Helper;
+using AIMS.Helper;
 using AIMS.Models;
 using InventoryContext;
 using System;
@@ -120,9 +120,14 @@ namespace AIMS.Controllers
                 stocks = (from inv in context.InventoryItem
                           join uom in context.UnitOfMeasurement on inv.UnitOfMeasurementId equals uom.UnitOfMeasurementId
 
+
                           //join rq in context.RequestItem on inv.InventoryItemId equals rq.InventoryItemId  into joined3
                           //from rqy in joined3.DefaultIfEmpty()
 
+
+
+                          join rq in context.RequestItem on inv.InventoryItemId equals rq.RequestItemId into joined3
+                          from rqy in joined3.DefaultIfEmpty()
 
 
 
@@ -136,6 +141,11 @@ namespace AIMS.Controllers
                               //from rqy in joined3.DefaultIfEmpty()
 
 
+                              //join rq in computeRequestedQuantity on inv.InventoryItemId equals rq.InventoryItemID into joined3
+                              //from rqy in joined3.DefaultIfEmpty()
+
+
+
                           select new Stocks
                           {
 
@@ -146,7 +156,11 @@ namespace AIMS.Controllers
                               ItemBegBal = inv.ItemBegBal,
                               TotalStock = remainingQtyj == null ? 0 : remainingQtyj.RemainingQuantity,
                               RequestedQuantity = requestedQtyj == null ? 0 : requestedQtyj.QuantityRequest,
+
                               LatestQuantity = remainingQtyj == null ? 0 : remainingQtyj.ReceiveQty,
+
+                            //  LatestQuantity = rqy.Quantity.ToString(),
+
                               LastRequestedDate = requestedQtyj.LastRequestedDate,
 
 

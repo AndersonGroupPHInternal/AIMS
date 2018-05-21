@@ -1,4 +1,5 @@
-﻿@using AccountsWebAuthentication.Helper;
+﻿
+@using AccountsWebAuthentication.Helper;
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,22 +29,6 @@
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" /><!--My css stylesheet-->
 
 </head>
-
-<style>
-    .navbar {
-        border-bottom-color: #c05f5f !important;
-        border-width: 0 1px 4px 1px;
-    }
-
-    li a:hover, .navbar-brand:hover {
-        color: #2b358a !important;
-        font-weight: bold;
-    }
-
-    .navDiv {
-        height: 90px;
-    }
-</style>
 
 <body ng-app="myApp">
     <div class="navbar navbar-default navbar-fixed-top navDiv">
@@ -100,8 +85,8 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-archive"></i> Inventory <span class="fa fa-chevron-down"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/Inventory/Stocks">Stock</a></li>
-                                <li><a href="/Inventory/BeginningBalance">Inventory Summary</a></li>
+                                <li><a href="/Inventory/Stocks">Stocks</a></li>
+                                @*<li><a href="/Inventory/BeginningBalance">Inventory Summary</a></li>*@
                             </ul>
                         </li>
                     }
@@ -395,6 +380,19 @@
     </div>
 
     <style>
+        .navbar {
+            border-bottom-color: #c05f5f !important;
+            border-width: 0 1px 4px 1px;
+        }
+
+        li a:hover, .navbar-brand:hover {
+            color: #2b358a !important;
+            font-weight: bold;
+        }
+
+        .navDiv {
+            height: 90px;
+        }
         .jumbotron {
             width: 90%;
             margin: auto;
@@ -452,4 +450,6 @@
     </style>
 
 </body>
+
+@using AccountsWebAuthentication.Helper;
 </html>

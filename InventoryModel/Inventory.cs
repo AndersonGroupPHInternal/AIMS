@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -42,6 +42,12 @@ namespace AIMS.Models
         }
         public string ItemCode { get; set; }
         public string ItemBegBal { get; set; }
+
         public int LatestQuantity { get; set; }
+
+
+        //public string LatestQuantity { get; set; }
+
+
     }
 }

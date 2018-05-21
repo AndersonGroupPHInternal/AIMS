@@ -133,6 +133,8 @@
 
     }
 
+
+
     //Display supplier info modal
     $scope.SupplierInformation = function (item) {
         $scope.supplierInfo = item;
