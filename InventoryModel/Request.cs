@@ -12,6 +12,8 @@ namespace AIMS.Models
         public DateTime RequisitionDate { get; set; }
         public DateTime RequiredDate { get; set; }
 
+        
+    public string SupplierName { get; set; }
         public string RequisitionDateString { get; set; }
         public string RequiredDateString { get; set; }
 

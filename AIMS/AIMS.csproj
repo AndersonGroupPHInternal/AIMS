@@ -1272,6 +1272,8 @@
     <Content Include="Views\Inventory\Stocks.cshtml" />
     <Content Include="Views\Shared\_ReviewRequest.cshtml" />
     <Content Include="Views\Request\PullOutList.cshtml" />
+    <Content Include="Views\Reviewer\PurchaseOrderPDF.cshtml" />
+    <Content Include="Views\Requisition\GeneratePdf.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

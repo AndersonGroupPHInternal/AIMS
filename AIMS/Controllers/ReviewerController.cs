@@ -293,67 +293,43 @@ namespace AIMS.Controllers
                                    where req.Status == Status
                                    select new Requisition
                                    {
-                                       RequisitionID = req.RequisitionId,
+                                       RequisitionId = req.RequisitionId,
                                        SpecialInstruction = req.SpecialInstruction,
                                        RequisitionDate = req.RequisitionDate,
                                        RequiredDate = req.RequiredDate,
                                        RequisitionType = req.RequisitionType,
                                        Status = req.Status,
-                                       SupplierID = req.SupplierId,
+                                       SupplierId = req.SupplierId,
                                        Reason = req.ReasonForDeclined,
-                                       LocationID = loc.LocationId,
+                                       LocationId = loc.LocationId,
                                        LocationName = loc.LocationName,
                                        LocationAddress = loc.LocationAddress,
-                                       UserID = req.UserId.Value
+                                       UserID = req.UserId
                                    }).ToList();
                 }
                 var users = _iFUser.Read();
-                //using (var context = new AccountDbContext())//Use dbAccount
-                //{
-                //    var userIDs = requisition.Select(b => b.UserID);
-                //    //SELECT ALL USER FROM DbAccount
-                //    account = (from user in context.Users
-                //               where userIDs.Contains(user.UserId)
-                //               select new Account
-                //               {
-                //                   UserID = user.UserId,
-                //                   Firstname = user.Firstname,
-                //                   Middlename = user.Middlename,
-                //                   Lastname = user.Lastname,
-                //                   Department = user.Department,
-                //                   Contact = user.Contact,
-                //                   Email = user.Email,
-                //               }).ToList();
-                //}
-
-                //Join all data (account and requisition)
 
                 requisition = (from req in requisition
                                join acc in users
                                     on req.UserID equals acc.UserId
                                select new Requisition
                                {
-                                   RequisitionID = req.RequisitionID,
+                                   RequisitionId = req.RequisitionId,
 
                                    Firstname = acc.Username,
-                                   //Middlename = acc.Middlename,
-                                   //Lastname = acc.Lastname,
-                                   //Department = acc.Department,
-                                   //Contact = acc.Contact,
-                                   //Email = acc.Email,
 
                                    SpecialInstruction = req.SpecialInstruction,
                                    RequisitionDateString = String.Format("{0: MMMM dd, yyyy}", req.RequisitionDate),
                                    RequiredDateString = String.Format("{0: MMMM dd, yyyy}", req.RequiredDate),
                                    RequisitionType = req.RequisitionType,
                                    Status = req.Status,
-                                   SupplierID = req.SupplierID,
+                                   SupplierId = req.SupplierId,
                                    Reason = req.Reason,
-                                   LocationID = req.LocationID,
+                                   LocationId = req.LocationId,
                                    LocationName = req.LocationName,
                                    LocationAddress = req.LocationAddress,
-                               }).OrderBy(e => e.RequisitionID).Skip(beginning).Take(page.itemPerPage).ToList().ToList();
-                return Json(requisition);//Return data as json
+                               }).OrderBy(e => e.RequisitionId).Skip(beginning).Take(page.itemPerPage).ToList().ToList();
+                return Json(requisition);
             }
             catch (Exception ex)
             {
@@ -421,20 +397,20 @@ namespace AIMS.Controllers
                                    where req.Status == "Partial Delivery" || req.Status == "Delivered"
                                    select new Requisition
                                    {
-                                       PartialDeliveryID = pd.PartialDeliveryId,
+                                       PartialDeliveryId = pd.PartialDeliveryId,
                                        DeliveryDate = pd.DeliveryDate,
-                                       RequisitionID = req.RequisitionId,
+                                       RequisitionId = req.RequisitionId,
                                        SpecialInstruction = req.SpecialInstruction,
                                        RequisitionDate = req.RequisitionDate,
                                        RequiredDate = req.RequiredDate,
                                        RequisitionType = req.RequisitionType,
                                        Status = req.Status,
-                                       SupplierID = pd.SupplierId,
+                                       SupplierId = pd.SupplierId,
                                        Reason = req.ReasonForDeclined,
-                                       LocationID = loc.LocationId,
+                                       LocationId = loc.LocationId,
                                        LocationName = loc.LocationName,
                                        LocationAddress = loc.LocationAddress,
-                                       UserID = req.UserId.Value,
+                                       UserID = req.UserId,
                                        SupplierInvoiceNo = pd.SupplierInvoiceNo,
                                        DeliveryReceiptNo = pd.DeliveryReceiptNo
                                    }).ToList();
@@ -466,7 +442,7 @@ namespace AIMS.Controllers
                                     on req.UserID equals acc.UserID
                                select new Requisition
                                {
-                                   RequisitionID = req.RequisitionID,
+                                   RequisitionId = req.RequisitionId,
 
                                    Firstname = acc.Username,
                                    //Middlename = acc.Middlename,
@@ -475,21 +451,21 @@ namespace AIMS.Controllers
                                    //Contact = acc.Contact,
                                    //Email = acc.Email,
 
-                                   PartialDeliveryID = req.PartialDeliveryID,
+                                   PartialDeliveryId = req.PartialDeliveryId,
                                    DeliveryDateString = String.Format("{0: MMMM dd, yyyy}", req.DeliveryDate),
                                    SpecialInstruction = req.SpecialInstruction,
                                    RequisitionDateString = String.Format("{0: MMMM dd, yyyy}", req.RequisitionDate),
                                    RequiredDateString = String.Format("{0: MMMM dd, yyyy}", req.RequiredDate),
                                    RequisitionType = req.RequisitionType,
                                    Status = req.Status,
-                                   SupplierID = req.SupplierID,
+                                   SupplierId = req.SupplierId,
                                    Reason = req.Reason,
-                                   LocationID = req.LocationID,
+                                   LocationId = req.LocationId,
                                    LocationName = req.LocationName,
                                    LocationAddress = req.LocationAddress,
                                    SupplierInvoiceNo = req.SupplierInvoiceNo,
                                    DeliveryReceiptNo = req.DeliveryReceiptNo
-                               }).OrderBy(e => e.RequisitionID).Skip(beginning).Take(page.itemPerPage).ToList().ToList();
+                               }).OrderBy(e => e.RequisitionId).Skip(beginning).Take(page.itemPerPage).ToList().ToList();
                 return Json(requisition);//Return data as json
             }
             catch (Exception ex)
@@ -516,41 +492,22 @@ namespace AIMS.Controllers
                                      on req.LocationId equals loc.LocationId
                                    select new Requisition
                                    {
-                                       RequisitionID = req.RequisitionId,
+                                       RequisitionId = req.RequisitionId,
                                        SpecialInstruction = req.SpecialInstruction,
                                        RequisitionDate = req.RequisitionDate,
                                        RequiredDate = req.RequiredDate,
                                        RequisitionType = req.RequisitionType,
                                        Status = req.Status,
-                                       SupplierID = req.SupplierId,
+                                       SupplierId = req.SupplierId,
                                        Reason = req.ReasonForDeclined,
-                                       LocationID = loc.LocationId,
+                                       LocationId = loc.LocationId,
                                        LocationName = loc.LocationName,
-                                       UserID = req.UserId.Value
+                                       UserID = req.UserId
                                    }).ToList();
                 }
 
                 var users = _iFUser.Read();
-                //using (var context = new AccountDbContext())//Use dbAccount
-                //{
-                //    var userIDs = requisition.Select(b => b.UserID);
-                //    //SELECT ALL USER FROM DbAccount
-                //    account = (from user in context.Users
-                //               where userIDs.Contains(user.UserId)
-                //               select new Account
-                //               {
-                //                   UserID = user.UserId,
-                //                   Firstname = user.Firstname,
-                //                   Middlename = user.Middlename,
-                //                   Lastname = user.Lastname,
-                //                   Department = user.Department,
-                //                   Contact = user.Contact,
-                //                   Email = user.Email,
-                //               }).ToList();
-                //}
 
-
-                //Join all data (account and requisition)
                 requisition = (from req in requisition
                                join acc in account
                                   on req.UserID equals acc.UserID
@@ -563,15 +520,15 @@ namespace AIMS.Controllers
                                    Department = acc.Department,
                                    Contact = acc.Contact,
                                    Email = acc.Email,
-                                   RequisitionID = req.RequisitionID,
+                                   RequisitionId = req.RequisitionId,
                                    SpecialInstruction = req.SpecialInstruction,
                                    RequisitionDateString = req.RequisitionDate.ToString(),
                                    RequiredDateString = req.RequiredDate.ToString(),
                                    RequisitionType = req.RequisitionType,
                                    Status = req.Status,
                                    Reason = req.Reason,
-                                   SupplierID = req.SupplierID,
-                                   LocationID = req.LocationID,
+                                   SupplierId = req.SupplierId,
+                                   LocationId = req.LocationId,
                                    LocationName = req.LocationName
                                }).ToList();
 
@@ -601,7 +558,7 @@ namespace AIMS.Controllers
                                              on reqItem.InventoryItemId equals inv.InventoryItemId
                                            join uom in context.UnitOfMeasurement
                                              on inv.UnitOfMeasurementId equals uom.UnitOfMeasurementId
-                                           where reqItem.RequisitionId == requisition.RequisitionID
+                                           where reqItem.RequisitionId == requisition.RequisitionId
                                            select new
                                            {
                                                RequisitionItemID = reqItem.RequisitionItemId,
@@ -615,7 +572,7 @@ namespace AIMS.Controllers
                                                SupplierID = req.SupplierId
                                            };
                     var supplierInfo = from supp in context.Supplier
-                                       where supp.SupplierId == requisition.SupplierID
+                                       where supp.SupplierId == requisition.SupplierId
                                        select supp;
 
                     var reqItemAndSupp = from reqItems in requisitionItems
@@ -707,7 +664,7 @@ namespace AIMS.Controllers
                     //                           SupplierID = req.SupplierId
                     //                       };
                     supplier = (from supp in context.Supplier
-                                where supp.SupplierId == requisition.SupplierID
+                                where supp.SupplierId == requisition.SupplierId
                                 select new Supplier
                                 {
                                     TinNumber = supp.TinNumber,
@@ -722,7 +679,7 @@ namespace AIMS.Controllers
                                                        join ri in context.RequisitionItem on pdi.RequisitionItemId equals ri.RequisitionItemId
                                                        join ii in context.InventoryItem on ri.InventoryItemId equals ii.InventoryItemId
                                                        join uom in context.UnitOfMeasurement on ii.UnitOfMeasurementId equals uom.UnitOfMeasurementId
-                                                       where pdi.PartialDeliveryId == requisition.PartialDeliveryID && pdi.DeliveredQuantity != 0
+                                                       where pdi.PartialDeliveryId == requisition.PartialDeliveryId && pdi.DeliveredQuantity != 0
                                                        select new RequisitionItem
                                                        {
                                                            InventoryItemID = ii.InventoryItemId,
@@ -789,6 +746,27 @@ namespace AIMS.Controllers
                 return Json(ex);
             }
         }
+
+        [HttpPost]
+        public JsonResult Suppliername()
+        {
+            List<Request> requests = new List<Request>();
+            using (var context = new InventoryDbContext())
+            {
+                requests = (from sup in context.Supplier
+                      
+                            
+
+                            select new Request
+                            {
+                                SupplierName = sup.SupplierName,
+                            }).ToList();
+
+            }
+            return Json(requests);
+        }
+
+
 
 
         //DISPLAY TOTAL PAGES OF SUPPLIER
@@ -1007,12 +985,12 @@ namespace AIMS.Controllers
 
                     if (requisition.Status == "Approved")
                     {
-                        var tblPurchasingOrder = context.PurchasingOrder.FirstOrDefault(a => (a.RequisitionId == requisitionID && a.SupplierId == requisition.SupplierID));
+                        var tblPurchasingOrder = context.PurchasingOrder.FirstOrDefault(a => (a.RequisitionId == requisitionID && a.SupplierId == requisition.SupplierId));
                         if (tblPurchasingOrder == null)
                         {
                             EPurchasingOrder purchasingOrder = new EPurchasingOrder()
                             {
-                                SupplierId = requisition.SupplierID,
+                                SupplierId = requisition.SupplierId,
                                 RequisitionId = requisitionID,
                                 DeliveryCharges = requisition.DeliveryCharges,
                                 DeliveryDate = DateTime.Now
@@ -1044,7 +1022,7 @@ namespace AIMS.Controllers
                             if (isRequisitionCompleted)
                             {
                                 var eRequisition = context.Requisition.FirstOrDefault(x => x.RequisitionId == requisitionID);
-                                eRequisition.SupplierId = requisition.SupplierID;
+                                eRequisition.SupplierId = requisition.SupplierId;
                                 eRequisition.Status = requisition.Status;
                                 context.SaveChanges();//Save status
                             }
@@ -1058,7 +1036,7 @@ namespace AIMS.Controllers
                     else
                     {
                         var eRequisition = context.Requisition.FirstOrDefault(x => x.RequisitionId == requisitionID);
-                        eRequisition.SupplierId = requisition.SupplierID;
+                        eRequisition.SupplierId = requisition.SupplierId;
                         eRequisition.Status = requisition.Status;
                         context.SaveChanges();//Save status
                     }
@@ -1204,14 +1182,14 @@ namespace AIMS.Controllers
                 using (var context = new InventoryDbContext())//use dbInventory
                 {
                     //loop all elements of requisition
-                    var tblRequisition = context.Requisition.FirstOrDefault(x => x.RequisitionId == requisition.RequisitionID);
+                    var tblRequisition = context.Requisition.FirstOrDefault(x => x.RequisitionId == requisition.RequisitionId);
                     tblRequisition.RequiredDate = requisition.RequiredDate;
                     context.SaveChanges();//update requiredDate from tblRequisition
                     //loop all elements of requistionitem
                     foreach (var items in requisition.RequisitionItems)
                     {
                         foreach (var some in context.RequisitionItem
-                            .Where(x => x.RequisitionId == requisition.RequisitionID && x.InventoryItemId == items.InventoryItemID)
+                            .Where(x => x.RequisitionId == requisition.RequisitionId && x.InventoryItemId == items.InventoryItemID)
                             .ToList())
                         {
                             some.Description = items.Description;
@@ -1245,7 +1223,7 @@ namespace AIMS.Controllers
                     foreach (var items in requisition.RequisitionItems)
                     {
                         foreach (var some in context.RequisitionItem
-                            .Where(x => x.RequisitionId == requisition.RequisitionID && x.RequisitionItemId == items.RequisitionItemID)
+                            .Where(x => x.RequisitionId == requisition.RequisitionId && x.RequisitionItemId == items.RequisitionItemID)
                             .ToList())
                         {
                             //some.Description = items.Description;

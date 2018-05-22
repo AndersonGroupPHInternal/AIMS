@@ -64,7 +64,7 @@ namespace AIMS.Controllers
         {
             var date = String.Format("{0:yyyymmdd}", DateTime.Now);
             var req = new Requisition();
-            req.RequisitionID = 1;
+            req.RequisitionId = 1;
             req.RequisitionDate = DateTime.Now;
             req.Firstname = "Mark";
             req.Lastname = "Atienza";
