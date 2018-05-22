@@ -293,8 +293,6 @@ app.controller("myCtrl", function ($scope, $http) {
         }
     }
 
-
-
         //$scope.addInventoryItem = function (newItemName, unitOfMeasurementID, newItemCode, newBegBal) {
         //    var addItemConfirm = confirm('Are you sure to add this new item?');
         //    if (addItemConfirm) {
