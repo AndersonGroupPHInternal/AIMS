@@ -24,6 +24,20 @@ namespace InventoryEntity
 
         public object RequestItemId { get; set; } //Todo Remove this
 
+
+        public int ItemBegBal { get; set; }
+        public string ItemCode { get; set; }
+        public object RequestItemId { get; set; }
+
+
+
+
+       
+
+
+
+
         public ICollection<ERequisitionItem> RequisitionItems { get; set; }
+
     }
 }

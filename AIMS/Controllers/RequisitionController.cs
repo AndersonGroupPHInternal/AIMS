@@ -108,7 +108,7 @@ namespace AIMS.Controllers
                             InventoryItemID = allItem.InventoryItemID,
                             ItemName = allItem.ItemName,
                             ItemCode = allItem.ItemCode,
-                            ItemBegBal = allItem.ItemBegBal,
+                            ItemBegBal = allItem.ItemBegBal.ToString(),
                             UnitOfMeasurement = new UnitOfMeasurement
                             {
                                 UnitOfMeasurementID = allItem.UnitOfMeasurementID,
@@ -184,7 +184,7 @@ namespace AIMS.Controllers
                             InventoryItemID = dbs.InventoryItemID,
                             ItemName = dbs.ItemName,
                             ItemCode = dbs.ItemCode,
-                            ItemBegBal = dbs.ItemBegBal,
+                            ItemBegBal = dbs.ItemBegBal.ToString(),
                             UnitOfMeasurement = new UnitOfMeasurement
                             {
                                 UnitOfMeasurementID = dbs.UnitOfMeasurementID,
@@ -727,7 +727,7 @@ namespace AIMS.Controllers
 
                 using (var context = new InventoryDbContext())
                 {
-                    var tblInventoryItem = context.InventoryItem.FirstOrDefault(a => (a.ItemName.ToLower() == newItemName.ToLower() && a.ItemCode.ToLower() == newItemCode.ToLower() && a.ItemBegBal.ToLower() == newBegBal.ToLower() && a.UnitOfMeasurementId == unitOfMeasurementID));
+                    var tblInventoryItem = context.InventoryItem.FirstOrDefault(a => (a.ItemName.ToLower() == newItemName.ToLower() && a.ItemCode.ToLower() == newItemCode.ToLower() && a.ItemBegBal.ToString() == newBegBal.ToLower() && a.UnitOfMeasurementId == unitOfMeasurementID));
                     if (tblInventoryItem == null)
                     {
                         //string name;
@@ -744,7 +744,10 @@ namespace AIMS.Controllers
                             ItemName = newItemName,
                             UnitOfMeasurementId = unitOfMeasurementID,
                             ItemCode = newItemCode,
-                            ItemBegBal = newBegBal,
+
+
+                            ItemBegBal = int.Parse(newBegBal)
+
 
                         };
                         context.InventoryItem.Add(eInventoryItem);

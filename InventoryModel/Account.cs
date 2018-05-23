@@ -1,6 +1,6 @@
 ﻿using BaseModel;
 
-namespace AIMS.Models
+namespace AIMS.Models //ToDo: This should be InventoryModel
 {
     public class Account : Base
     {

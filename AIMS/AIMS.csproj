@@ -354,7 +354,7 @@
     <Content Include="MyScripts\others\date-functions.js" />
     <Content Include="MyScripts\request\current-request-status.js" />
     <Content Include="MyScripts\request\current-request.js" />
-    <Content Include="MyScripts\request\pull-outList.js" />
+    <Content Include="MyScripts\request\viewlist.js" />
     <Content Include="MyScripts\requisition\all-requisition.js" />
     <Content Include="MyScripts\requisition\partial-delivery.js" />
     <Content Include="MyScripts\requisition\po.js" />
@@ -1271,7 +1271,9 @@
     <Content Include="Views\Reviewer\PO.cshtml" />
     <Content Include="Views\Inventory\Stocks.cshtml" />
     <Content Include="Views\Shared\_ReviewRequest.cshtml" />
-    <Content Include="Views\Request\PullOutList.cshtml" />
+    <Content Include="Views\Request\_Request.cshtml" />
+    <Content Include="Views\Request\Create.cshtml" />
+    <Content Include="Views\Request\ViewList.cshtml" />
     <Content Include="Views\Reviewer\PurchaseOrderPDF.cshtml" />
     <Content Include="Views\Requisition\GeneratePdf.cshtml" />
     <None Include="Web.Debug.config">

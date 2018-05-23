@@ -129,7 +129,9 @@
 
                                         <td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
                                             {{  (item.RequestedQuantity) - ((item.RequestedQuantity) - (item.LatestQuantity))  }}
-                                           *<span ng-bind="item.LatestQuantity"></span>
+
+                                            <span ng-bind="item.LatestQuantity"></span>
+
                                         </td>
                                         <td ng-class='{red : item.RemainingQuantity <=10, blue: item.RemainingQuantity > 10}'>
                                             <span ng-bind="item.RemainingQuantity"></span>

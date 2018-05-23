@@ -4,6 +4,7 @@ using AccountsWebAuthentication.Helper;
 using AIMS.Models;
 using InventoryContext;
 using InventoryEntity;
+using InventoryFunction;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,10 +16,36 @@ namespace AIMS.Controllers
     public class RequestController : BaseController
     {
         private IFUser _iFUser;
+        private IFRequest _iFRequest;
         public RequestController()
         {
             _iFUser = new FUser();
+            _iFRequest = new FRequest();
         }
+
+        #region Create 
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View(new Request());
+        }
+
+        [HttpGet]
+        public ActionResult ViewList()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Request request)
+        {
+
+
+            request = _iFRequest.Create(request);
+            return RedirectToAction("ViewList", "Request");
+            //, new { id = request.RequestId }
+        }
+        #endregion
         // GET: Request
 
         [CustomAuthorize(AllowedRoles = new string[] { "DepartmentHead" })]
@@ -41,11 +68,60 @@ namespace AIMS.Controllers
             return View();
         }
 
-        [CustomAuthorize(AllowedRoles = new string[] { "Employee" })]
-        public ActionResult PullOutList()
+        public ActionResult Delete(int id)
         {
-            return View();
+            using (var context = new InventoryDbContext())
+            {
+                var result = context.Request.Where(x => x.RequestId.Equals(id)).FirstOrDefault();
+                if (result != null)
+                {
+                    context.Request.Remove(result);
+                    context.SaveChanges();
+                }
+            }
+            return new JsonResult { Data = "Successfully Deleted", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+
+
+        [HttpPost]
+        public JsonResult ViewReq()
+        {
+
+            List<Request> requests = new List<Request>();
+            using (var context = new InventoryDbContext())
+            {
+                requests = (from reqi in context.RequestItem
+                            join inve in context.InventoryItem on reqi.InventoryItemId equals inve.InventoryItemId
+
+                            join suppitem in context.SupplierInventoryItem on reqi.InventoryItemId equals suppitem.InventoryId into joined1
+                            from suppitems in joined1.DefaultIfEmpty()
+
+                            join supplier in context.Supplier on suppitems.SupplierId equals supplier.SupplierId into joined2
+                            from suppliers in joined2.DefaultIfEmpty()
+
+                            join req in context.Request on reqi.RequestId equals req.RequestId into joined
+                            from reqs in joined.DefaultIfEmpty()
+
+                            join loc in context.Location on reqs.LocationId equals loc.LocationId into joined6
+                            from locs in joined6.DefaultIfEmpty()
+
+
+                            select new Request
+                            {
+                                RequestID = reqs.RequestId,
+                                RequestName = suppliers.SupplierName,
+                                RequisitionDates = reqs.RequestDate,
+                                RequestLocation = locs.LocationName,
+                                RequiredDates = reqs.RequiredDate,
+                                RequestItem = inve.ItemName,
+                                RequestQuanlity = reqi.Quantity,
+                              RequestDesciption = reqi.Description,
+                                }).ToList();
+
+            }
+            return Json(requests);
+        }
+    
 
 
 
@@ -428,47 +504,47 @@ namespace AIMS.Controllers
             }
         }
 
-        public JsonResult Pullout(int requestID)
-        {
-            try
-            {
-                List<Pullout> pullout = new List<Pullout>();//Exam = Exam model
-                using (var context = new InventoryDbContext())
-                {
-                    var displayItem = from req in context.Request
-                                      join reqItem in context.RequestItem
-                                        on req.RequestId equals reqItem.RequestId
-                                      join inv in context.InventoryItem
-                                        on reqItem.InventoryItemId equals inv.InventoryItemId
-                                      join uom in context.UnitOfMeasurement
-                                        on inv.UnitOfMeasurementId equals uom.UnitOfMeasurementId
-                                      where reqItem.RequestId == requestID
-                                      select new
-                                      {
-                                          InventoryItemId = inv.InventoryItemId,
-                                          ItemName = inv.ItemName,
-                                          UnitDescription = uom.Description,
-                                          Quantity = reqItem.Quantity,
-                                          SpecialInstruction = req.SpecialInstruction,
-                                          Requestdate = req.RequestDate
-                                      };
-                    pullout = displayItem.Select(
-                        ri => new Pullout
-                        {
-                            InventoryItemID = ri.InventoryItemId,
-                            ItemName = ri.ItemName,
-                            UnitOfMeasurement = ri.UnitDescription,
-                            Quantity = ri.Quantity,
-                            RequestDate = ri.Requestdate,
-                        }).ToList();
-                }
-                return Json(pullout);
-            }
-            catch (Exception ex)
-            {
-                return Json(ex.ToString());
-            }
-        }
+        //public JsonResult Pullout(int requestID)
+        //{
+        //    try
+        //    {
+        //        List<Pullout> pullout = new List<Pullout>();//Exam = Exam model
+        //        using (var context = new InventoryDbContext())
+        //        {
+        //            var displayItem = from req in context.Request
+        //                              join reqItem in context.RequestItem
+        //                                on req.RequestId equals reqItem.RequestId
+        //                              join inv in context.InventoryItem
+        //                                on reqItem.InventoryItemId equals inv.InventoryItemId
+        //                              join uom in context.UnitOfMeasurement
+        //                                on inv.UnitOfMeasurementId equals uom.UnitOfMeasurementId
+        //                              where reqItem.RequestId == requestID
+        //                              select new
+        //                              {
+        //                                  InventoryItemId = inv.InventoryItemId,
+        //                                  ItemName = inv.ItemName,
+        //                                  UnitDescription = uom.Description,
+        //                                  Quantity = reqItem.Quantity,
+        //                                  SpecialInstruction = req.SpecialInstruction,
+        //                                  Requestdate = req.RequestDate
+        //                              };
+        //            pullout = displayItem.Select(
+        //                ri => new Pullout
+        //                {
+        //                    InventoryItemID = ri.InventoryItemId,
+        //                    ItemName = ri.ItemName,
+        //                    UnitOfMeasurement = ri.UnitDescription,
+        //                    Quantity = ri.Quantity,
+        //                    RequestDate = ri.Requestdate,
+        //                }).ToList();
+        //        }
+        //        return Json(pullout);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Json(ex.ToString());
+        //    }
+        //}
 
         // ADD REQUEST
         [HttpPost]
