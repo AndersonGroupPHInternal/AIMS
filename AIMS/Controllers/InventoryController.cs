@@ -150,10 +150,9 @@ namespace AIMS.Controllers
                               TotalStock = remainingQtyj == null ? 0 : remainingQtyj.RemainingQuantity,
                               RequestedQuantity = requestedQtyj == null ? 0 : requestedQtyj.QuantityRequest,
                               LatestQuantity = remainingQtyj == null ? 0 : remainingQtyj.ReceiveQty,
+
                               LastRequestedDate = requestedQtyj.LastRequestedDate,
                               DeliveryDate = requestedQtyj.DeliveryDate,
-
-
 
                           }).OrderByDescending(e => e.LastRequestedDate).Skip(beginning).Take(page.itemPerPage).ToList().ToList();
             }

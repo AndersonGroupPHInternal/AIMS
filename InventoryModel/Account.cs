@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using BaseModel;
 
 namespace AIMS.Models //ToDo: This should be InventoryModel
 {
-    public class Account : BaseModel
+    public class Account : Base
     {
         public int UserID { get; set; }
         public string Username { get; set; }

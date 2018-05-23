@@ -34,9 +34,9 @@ namespace AIMS.Models
         public string UnitOfDescription { get; set; }
         public DateTime?  LastRequestedDate { get; set; }
 
-        public string LastRequestedDateString => (LastRequestedDate.Value == default(DateTime)) ?
-            "No Transaction yet":
-            LastRequestedDate.Value.ToString("MM/dd/yyyy");
+        //public string LastRequestedDateString => (LastRequestedDate.Value == default(DateTime)) ?
+        //    "No Transaction yet":
+        //    LastRequestedDate.Value.ToString("dd/MM/yyyy");
 
 
         
@@ -59,9 +59,6 @@ namespace AIMS.Models
         public int ItemBegBal { get; set; }
 
         public int LatestQuantity { get; set; }
-
-
-        //public string LatestQuantity { get; set; }
 
 
     }

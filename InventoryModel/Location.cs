@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using BaseModel;
 
 namespace AIMS.Models
 {
-    public class Location
+    public class Location : Base
     {
         public int LocationID { get; set; }
-        public string LocationName { get; set; }
+
         public string LocationAddress { get; set; }
+        public string LocationName { get; set; }
     }
 }

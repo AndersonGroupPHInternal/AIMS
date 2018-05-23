@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -23,6 +23,7 @@ namespace AIMS.Models
           RequisitionDates.Value.ToString("MM/dd/yyyy");
 
         public DateTime RequiredDate { get; set; }
+
 
         public DateTime ? RequiredDates { get; set; }
 

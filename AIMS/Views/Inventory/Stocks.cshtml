@@ -1,7 +1,6 @@
 
 <script type="text/javascript" src="~/MyScripts/inventory/stocks.js"></script>
 
-
 <div class="jumbotron" style="margin-top: 100px;">
     <div ng-controller="myCtrl" ng-init="initialize()">
         <div class="page-title">
@@ -99,11 +98,13 @@
                                     <tr ng-show="(itemStocks | filter:searchText).length == 0">
                                         <td colspan="6" id="locationAction" align="center">No results found...</td>
                                     </tr>
+
                                 </tbody>
                             </table>
 
                     </div>
                     @Html.Partial("~/Views/Shared/_Pagination.cshtml")
+
                 </div>
             </div>
         </div>

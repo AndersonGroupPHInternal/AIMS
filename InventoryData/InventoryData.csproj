@@ -4,7 +4,9 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+
     <ProjectGuid>{523CC3AC-53A2-4C11-9227-20FE74AD1BA5}</ProjectGuid>
+
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>InventoryData</RootNamespace>
@@ -31,6 +33,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BaseData, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+
+    <Reference Include="BaseEntity, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -50,8 +55,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+
     <Compile Include="IDRequest.cs" />
     <Compile Include="DRequest.cs" />
+
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -59,6 +66,12 @@
       <Project>{75780769-79b1-4179-8c0e-9a017dc365d6}</Project>
       <Name>InventoryContext</Name>
     </ProjectReference>
+
+    <ProjectReference Include="..\InventoryEntity\InventoryEntity.csproj">
+      <Project>{59a4d1f0-c418-4134-99ee-cf03934b42a8}</Project>
+      <Name>InventoryEntity</Name>
+    </ProjectReference>
+
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

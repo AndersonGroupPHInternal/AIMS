@@ -39,10 +39,12 @@ app.controller("myCtrl", function ($scope, $http) {
         var isValid;
     };
 
+
     //$scope.validation = function (inventoryItemId, itemName, totalStock, requestedQuantity, newItemLimit) {
     //    var isValid;
 
+
     //}
 
-
+    }
 });

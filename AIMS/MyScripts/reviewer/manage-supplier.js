@@ -2,8 +2,6 @@ app.controller("myCtrl", function ($scope, $http) {
     var vm = this;
     $scope.isItemExist;
 
-
-
     $scope.initialize = function () {
         $scope.page;
         $scope.loadpage(1, true);
@@ -66,6 +64,7 @@ app.controller("myCtrl", function ($scope, $http) {
 
             });
     }
+
     //add item options
     $scope.addNewItem = function () {
         var newItemNo = $scope.items.length + 1;
@@ -227,6 +226,7 @@ app.controller("myCtrl", function ($scope, $http) {
             function successCallback(response) {
                 $scope.existingUOM = response.data;
                 vm.existingUOMsx = []
+
                 for (var i in $scope.existingUOM) {
                     var uom = $scope.existingUOM[i];
                     vm.existingUOMsx.push({ UnitOfMeasurementID: '' + uom['UnitOfMeasurementID'], Description: uom['Description'] });
@@ -235,6 +235,7 @@ app.controller("myCtrl", function ($scope, $http) {
             function errorCallback(response) {
 
             });
+    }
 
     }
     //Function to close add new item modal
@@ -369,10 +370,12 @@ app.controller("myCtrl", function ($scope, $http) {
     //key press function to determine if item is existing
     $scope.key = function (data) {
         if (itemExists(data)) {
+
             $scope.isItemExist = true;
         } else {
             $scope.isItemExist = false;
         }
+
     };
     //check if  UnitOfMeasurement(UOM) is existing
     $scope.tempNewUOM;
@@ -385,10 +388,76 @@ app.controller("myCtrl", function ($scope, $http) {
     $scope.searchUOM = function (data) {
         $scope.tempNewUOM = data;
         if (uomExist(data)) {
+
+        //Check if item is existing
+        function itemExists(item) {
+            return vm.existingItemsx.some(function (el) {
+                return el.ItemName.toLowerCase().includes(item.toLowerCase());
+            });
+        }
+
+        //key press function to determine if item is existing
+        $scope.key = function (data) {
+            if (itemExists(data)) {
+                $scope.isItemExist = true;
+            } else {
+                $scope.isItemExist = false;
+            }
+        };
+        //check if  UnitOfMeasurement(UOM) is existing
+        $scope.tempNewUOM;
+        function uomExist(data) {
+            return vm.existingUOMsx.some(function (el) {
+                return el.Description.toLowerCase().includes(data.toLowerCase());
+            });
+        }
+        //key press function to determine if  UnitOfMeasurement(UOM) is existing
+        $scope.searchUOM = function (data) {
+            $scope.tempNewUOM = data;
+            if (uomExist(data)) {
+                $scope.forCheckUOM = true;
+            } else {
+                $scope.forCheckUOM = false;
+            }
+        };
+
+        //Add new Unit of Measurement to database
+        $scope.addNewUOM = function () {
+            vm.existingUOMsx = []
+            var data = {
+                unitDescription: $scope.tempNewUOM
+            };
+            $http.post('/Requisition/AddNewUnitOfMeasurement', data)
+                .then(
+                function successCallback(response) {
+                    if (response.data.length === 0) {
+                        $http.post('/Requisition/AllUnitOfMeasurement')//get all existing UnitOfMeasurement(UOM)
+                            .then(
+                            function successCallback(response) {
+                                $scope.existingUOM = response.data;
+                                for (var i in $scope.existingUOM) {
+                                    var uom = $scope.existingUOM[i];
+                                    vm.existingUOMsx.push({ UnitOfMeasurementID: '' + uom['UnitOfMeasurementID'], Description: uom['Description'] });
+                                }
+                            },
+                            function errorCallback(response) {
+
+                            });
+                        toastr.success("You've successfully added a new unit of description.", "New Unit of Description is added");
+                    }
+                },
+                function errorCallback(response) {
+
+                });
+        }
+
+        $scope.isUomSelected = function () {
+
             $scope.forCheckUOM = true;
         } else {
             $scope.forCheckUOM = false;
         }
+
     };
     //Add new Unit of Measurement to database
     $scope.addNewUOM = function () {
@@ -424,5 +493,41 @@ app.controller("myCtrl", function ($scope, $http) {
         $scope.forCheckUOM = true;
     }
 
+    });
 
-});
+
+//    //Add new Unit of Measurement to database
+//    $scope.addNewUOM = function () {
+//        vm.existingUOMsx = [];
+//        var data = {
+//            unitDescription: $scope.tempNewUOM
+//        };
+//        $http.post('/Requisition/AddNewUnitOfMeasurement', data)
+//            .then(
+//            function successCallback(response) {
+//                if (response.data.length === 0) {
+//                    $http.post('/Requisition/AllUnitOfMeasurement')//gett all existing UnitOfMeasurement(UOM)
+//                        .then(
+//                        function successCallback(response) {
+//                            $scope.existingUOM = response.data;
+//                            for (var i in $scope.existingUOM) {
+//                                var uom = $scope.existingUOM[i];
+//                                vm.existingUOMsx.push({ UnitOfMeasurementID: '' + uom['UnitOfMeasurementID'], Description: uom['Description'] });
+//                            }
+//                        },
+//                        function errorCallback(response) {
+
+//                        });
+//                    toastr.success("You've successfully added a new unit of description.", "New Unit of Description is added");
+//                }
+//            },
+//            function errorCallback(response) {
+
+//            });
+//    };
+
+//    $scope.isUomSelected = function () {
+//        $scope.forCheckUOM = true;
+//    };
+
+//});
